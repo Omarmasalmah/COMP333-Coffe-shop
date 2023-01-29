@@ -18,19 +18,22 @@
 <?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.orderesController">
-   <center>
+   <styleClass>
+      <String fx:value="photo" />
+      <String fx:value="button" />
+   </styleClass>
+   <top>
       <AnchorPane prefHeight="681.0" prefWidth="951.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="TableData" layoutX="34.0" layoutY="117.0" prefHeight="375.0" prefWidth="883.0">
+            <TableView fx:id="TableData" layoutX="34.0" layoutY="117.0" prefHeight="375.0" prefWidth="777.0">
               <columns>
                 <TableColumn fx:id="counter" prefWidth="27.999969482421875" text="#" />
                 <TableColumn fx:id="itemParcode" prefWidth="111.19999694824219" text="Item Parcode" />
-                  <TableColumn fx:id="itemName" prefWidth="171.20001220703125" text="Item Name" />
-                  <TableColumn fx:id="itemCategory" prefWidth="157.60003662109375" text="Category" />
-                  <TableColumn fx:id="itemQuantity" prefWidth="71.199951171875" text="Quantity" />
-                  <TableColumn fx:id="itemPrice" prefWidth="96.800048828125" text="Price" />
-                  <TableColumn fx:id="expDate" prefWidth="146.39990234375" text="Expiration Date" />
-                  <TableColumn fx:id="itembyEmployee" prefWidth="96.0001220703125" text="by Employee" />
+                  <TableColumn fx:id="itemName" prefWidth="158.0" text="Item Name" />
+                  <TableColumn fx:id="itemCategory" prefWidth="147.0" text="Category" />
+                  <TableColumn fx:id="itemQuantity" prefWidth="115.0" text="Quantity" />
+                  <TableColumn fx:id="itemPrice" prefWidth="91.0" text="Price" />
+                  <TableColumn fx:id="itembyEmployee" prefWidth="125.0" text="by Employee" />
               </columns>
             </TableView>
             <Button fx:id="btnback" layoutX="34.0" layoutY="21.0" mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="57.0" styleClass="button2" stylesheets="@application.css">
@@ -105,9 +108,5 @@
                </fill></Text>
          </children>
       </AnchorPane>
-   </center>
-   <styleClass>
-      <String fx:value="photo" />
-      <String fx:value="button" />
-   </styleClass>
+   </top>
 </BorderPane>

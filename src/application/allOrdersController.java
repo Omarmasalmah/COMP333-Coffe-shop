@@ -193,10 +193,10 @@ public class allOrdersController {
 			Parent root;
 			stage = (Stage) btnback.getScene().getWindow();
 			stage.close();
-			root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+			root = FXMLLoader.load(getClass().getResource("chooseOrder.fxml"));
 			Scene scene = new Scene(root, 901, 649);
 			stage.setScene(scene);
-			stage.setTitle("Menu");
+			stage.setTitle("Choose order");
 			stage.show();
 
 		} catch (IOException e1) {

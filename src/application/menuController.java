@@ -49,5 +49,21 @@ public class menuController {
 		}
 		
 	}
+    
+    @FXML
+    void LogOut(ActionEvent event) {
+		try { // open new stage
+			Stage stage;
+			Parent root;
+			stage = (Stage) btLogout.getScene().getWindow();
+			stage.close();
+			root = FXMLLoader.load(getClass().getResource("Sign_in.fxml"));
+			Scene scene = new Scene(root,600,400);
+			stage.setScene(scene);
+			stage.show();
+
+		} catch (IOException e1) {
+		}
+    }
 
 }

@@ -64,7 +64,7 @@
             <Font name="System Italic" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="btLogout" layoutX="225.0" layoutY="518.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="125.0" stylesheets="@application.css">
+      <Button fx:id="btLogout" layoutX="225.0" layoutY="518.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="43.0" prefWidth="125.0" stylesheets="@application.css">
          <graphic>
             <Label text="Logout!">
                <graphic>

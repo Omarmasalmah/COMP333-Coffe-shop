@@ -27,10 +27,10 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="allOrders" contentDisplay="RIGHT" layoutX="94.0" layoutY="192.0" mnemonicParsing="false" onAction="#allOrders" prefHeight="57.0" prefWidth="184.0" stylesheets="@application.css" text="           All Orders" />
+            <Button fx:id="allOrders" contentDisplay="RIGHT" layoutX="94.0" layoutY="238.0" mnemonicParsing="false" onAction="#allOrders" prefHeight="57.0" prefWidth="184.0" stylesheets="@application.css" text="           All Orders" />
             <Button fx:id="newOrder" contentDisplay="RIGHT" layoutX="90.0" layoutY="368.0" mnemonicParsing="false" onAction="#newOrder" prefHeight="57.0" prefWidth="184.0" stylesheets="@application.css" text="             Make Order" />
-            <Line endX="186.39999389648438" layoutX="184.0" layoutY="280.0" startX="-191.00001525878906" />
-            <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="101.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
+            <Line endX="186.39999389648438" layoutX="184.0" layoutY="332.0" startX="-191.00001525878906" />
+            <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="101.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/received.png" />
                </image>
@@ -45,12 +45,6 @@
                   <Font name="Times New Roman Bold Italic" size="32.0" />
                </font>
             </Text>
-            <Button fx:id="newOrder1" contentDisplay="RIGHT" layoutX="90.0" layoutY="297.0" mnemonicParsing="false" onAction="#newOrder" prefHeight="57.0" prefWidth="184.0" stylesheets="@application.css" text="             Pay Order" />
-            <ImageView fitHeight="76.0" fitWidth="55.0" layoutX="94.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../images/pay%20order.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
    </center>

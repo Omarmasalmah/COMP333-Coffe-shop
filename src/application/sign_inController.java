@@ -54,7 +54,11 @@ public class sign_inController {
 //				showDialog("error", "you entered a wrong data", null, AlertType.ERROR);
 //
 //			} 
+			System.out.println("enters");
+
 			if (txtName.getText().isEmpty()) {
+				System.out.println("nnnnnnnnnnnnnnnnn");
+
 				Message.displayMassage("Please enter the user name","Warning");
 				return;
 			}
@@ -72,7 +76,6 @@ public class sign_inController {
 					Manager.mng.setName(ManegName);
 					Manager.mng.setPassword(ManegPassword);
 					try { // open new stage
-
 						stage = (Stage) button_Login.getScene().getWindow();
 						stage.close();
 						root = FXMLLoader.load(getClass().getResource("Menu.fxml"));

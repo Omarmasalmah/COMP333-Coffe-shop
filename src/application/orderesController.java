@@ -270,8 +270,7 @@ public class orderesController {
 		dataList = FXCollections.observableArrayList(data);
 		TableData.setEditable(true);
 		counter.setSortable(false);
-		counter.setCellValueFactory(
-				column -> new ReadOnlyObjectWrapper<Number>(TableData.getItems().indexOf(column.getValue()) + 1));
+		counter.setCellValueFactory(column -> new ReadOnlyObjectWrapper<Number>(TableData.getItems().indexOf(column.getValue()) + 1));
 		itemParcode.setCellFactory(new PropertyValueFactory<invoiceData, Integer>("item_id"));
 		itemName.setCellValueFactory(new PropertyValueFactory<invoiceData, String>("itemName"));
 		itemQuantity.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("quantity"));
@@ -286,7 +285,6 @@ public class orderesController {
 		});
 		itemCategory.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("itemCat"));
 		itemPrice.setCellValueFactory(new PropertyValueFactory<invoiceData, Double>("full_sale_price"));
-		expDate.setCellValueFactory(new PropertyValueFactory<invoiceData, String>("expDate"));
 
 		itembyEmployee.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("emp_id"));
 		getData();

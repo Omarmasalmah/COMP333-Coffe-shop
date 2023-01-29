@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="500.0" style="-fx-background-color: #c5c5c5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.staticsProfitsController">
+   <top>
+      <AnchorPane prefHeight="472.0" prefWidth="918.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="numOrders" alignment="CENTER" layoutX="203.0" layoutY="136.0" prefHeight="46.0" prefWidth="162.0" style="-fx-border-radius: 50; -fx-border-color: blue; -fx-background-color: white; -fx-background-radius: 50;" text="Total Orders" />
+            <ImageView fitHeight="43.0" fitWidth="49.0" layoutX="115.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/icons8-how-many-quest.png" />
+               </image>
+            </ImageView>
+            <Text fill="#110000" layoutX="102.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TotoalOrders">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Text>
+            <Label fx:id="netIncome" alignment="CENTER" layoutX="203.0" layoutY="247.0" prefHeight="46.0" prefWidth="162.0" style="-fx-border-radius: 50; -fx-border-color: blue; -fx-background-color: white; -fx-background-radius: 50;" text="net Income" />
+            <Label fx:id="Profits" alignment="CENTER" layoutX="205.0" layoutY="349.0" prefHeight="46.0" prefWidth="162.0" style="-fx-border-radius: 50; -fx-border-color: blue; -fx-background-color: white; -fx-background-radius: 50;" text="Profits $" />
+            <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="107.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/salary.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="95.0" fitWidth="59.0" layoutX="107.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/money.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="116.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Income">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Text>
+            <Text layoutX="119.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profits" wrappingWidth="40.94415283203125">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Text>
+            <ImageView fitHeight="63.0" fitWidth="68.0" layoutX="223.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/financial-profit.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>

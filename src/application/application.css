@@ -1,0 +1,31 @@
+.photo{
+      -fx-background-image: url(file:///C:/Users/coolnet/Desktop/Java/DataBaseProject/src/application/basic2.jpg);
+      -fx-background-size: contain;
+       -fx-background-repeat: no-repeat; 
+       -fx-background-position: center;
+       -fx-background-size: 100% 100%;
+         
+  }
+  
+  .mainPhoto{
+      -fx-background-image: url(file:///C:/Users/coolnet/Desktop/Java/DataBaseProject/src/application/basic.jpg);
+      -fx-background-size: contain;
+       -fx-background-repeat: no-repeat; 
+       -fx-background-position: center;
+       -fx-background-size: 100% 100%;
+         
+  }
+  
+ .button{
+     -fx-background-color: #eeeeee;
+     -fx-background-insets: 0,9 9 8 9,9,10,11;
+     -fx-background-radius: 50;
+     
+    -fx-background-radius: 50;
+   
+}
+.button:hover
+    {
+     -fx-background-color: #ff1515;
+     -fx-background-radius: 50;
+    }

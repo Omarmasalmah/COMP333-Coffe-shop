@@ -21,9 +21,9 @@ public class Message {
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setMinWidth(250);
 		if (type.equalsIgnoreCase("warning")) {
-			window.getIcons().add(new Image("‪file:///C:/Users/coolnet/Desktop/Java/DataBaseProject/src/application/warning.png‬"));
+			window.getIcons().add(new Image("‪file:///C:/Users/coolnet/Desktop/Java/DataBaseProject/src/application/error.png‬"));
 			 imgWarning = new ImageView(
-					new Image("‪file:///C:/Users/coolnet/Desktop/Java/DataBaseProject/src/application/warning.png"));
+					new Image("‪file:///C:/Users/coolnet/Desktop/Java/DataBaseProject/src/application/error.png"));
 			window.setTitle(type);
 		} else if (type.equalsIgnoreCase("ok")) {
 			window.getIcons().add(new Image("file:\\Users\\Eyab\\Desktop\\Project_Pharmacy\\pharmacy\\correct.png"));

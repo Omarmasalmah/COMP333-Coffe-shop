@@ -55,8 +55,8 @@ public class sign_upController {
 	void signupOnAction(ActionEvent event) {
 		Employee rc;
 		try {
-		rc = new Employee(txtName.getText(), datefield.getValue().toString(), dateOFworkfield.getValue().toString(),
-				txtPassword.getText(), Integer.parseInt(txtphone.getText()), Double.parseDouble(txtsalary.getText()));
+		rc = new Employee(txtName.getText(), datefield.getValue().toString(), Integer.parseInt(txtphone.getText()),
+				txtPassword.getText(), dateOFworkfield.getValue().toString(), Double.parseDouble(txtsalary.getText()));
         
 		Employee.emd=rc;
 		insertData(rc);
@@ -108,14 +108,14 @@ public class sign_upController {
 //					+ rc.getId() + ",'" + rc.getEmployee_name() + "','" + sqlDate + "','" + sqlDate2 + "')");
 
 			connector.a.connectDB();
-			String sql = "Insert into employee (employee_name,birthday,date_of_employment,emp_password,phone,amount_paid) values(?,?,?,?,?,?)";
+			String sql = "Insert into employee (employee_name,birthday,phone,emp_password,date_of_employment,amount_paid) values(?,?,?,?,?,?)";
 			PreparedStatement ps = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
 			ps.setString(4, rc.getEmp_password());
 			ps.setString(1, rc.getEmployee_name());
-			ps.setInt(5, rc.getPhone());
+			ps.setInt(3, rc.getPhone());
 			ps.setDouble(6, rc.getAmount_paid());
 			ps.setTimestamp(2, new java.sql.Timestamp(myDate.getTime()));
-			ps.setTimestamp(3, new java.sql.Timestamp(myDate2.getTime()));
+			ps.setTimestamp(5, new java.sql.Timestamp(myDate2.getTime()));
 			ps.execute();
 
 		} catch (SQLException e) {

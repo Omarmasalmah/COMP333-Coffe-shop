@@ -3,6 +3,7 @@ package application;
 public class invoiceData {
 
 	private int order_id;
+	private String order_date;
 	private int quantity;
 	private double sale_price;
 	private int item_id;
@@ -14,9 +15,10 @@ public class invoiceData {
 		super();
 	}
 
-	public invoiceData(int order_id, int quantity, double sale_price, int item_id, int itemCat, String itemName, int emp_id) {
+	public invoiceData(int order_id, int quantity, double sale_price, int item_id, int itemCat, String itemName, int emp_id, String order_date) {
 		super();
 		this.order_id = order_id;
+		this.order_date = order_date;
 		this.quantity = quantity;
 		this.sale_price = sale_price;
 		this.item_id = item_id;
@@ -83,6 +85,14 @@ public class invoiceData {
 	}
 
 
+
+	public String getOrder_date() {
+		return order_date;
+	}
+
+	public void setOrder_date(String order_date) {
+		this.order_date = order_date;
+	}
 
 	@Override
 	public String toString() {

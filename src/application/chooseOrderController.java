@@ -78,9 +78,9 @@ public class chooseOrderController {
 			stage = (Stage) newOrder.getScene().getWindow();
 			stage.close();
 //			System.out.println("ok12");
-			root = FXMLLoader.load(getClass().getResource("order.fxml"));
+			root = FXMLLoader.load(getClass().getResource("Order.fxml"));
 //			System.out.println("ok1");
-			Scene scene = new Scene(root, 951, 781);
+			Scene scene = new Scene(root, 900, 700);
 			stage.setScene(scene);
 //			System.out.println("ok2");
 			stage.setTitle("Orders");

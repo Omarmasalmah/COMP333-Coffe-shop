@@ -17,8 +17,8 @@ public class Employee {
 	}
 
 	
-	public Employee(String employee_name, String birthday, String date_of_employment, String emp_password,
-			int phone, double amount_paid) {
+	public Employee(String employee_name, String birthday,int phone, String emp_password, String date_of_employment,
+			 double amount_paid) {
 		super();
 		this.employee_name = employee_name;
 		this.birthday = birthday;

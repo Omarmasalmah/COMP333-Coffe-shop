@@ -59,11 +59,11 @@ public class sign_inController {
 			if (txtName.getText().isEmpty()) {
 				System.out.println("nnnnnnnnnnnnnnnnn");
 
-				Message.displayMassage("Please enter the user name","Warning");
+				Message.displayMassage("Please enter the user name","error");
 				return;
 			}
 			if (txtPassword.getText().isEmpty()) {
-				Message.displayMassage("Please enter the txtPassword","Warning");
+				Message.displayMassage("Please enter the txtPassword","error");
 				return;
 			}
 //			else {

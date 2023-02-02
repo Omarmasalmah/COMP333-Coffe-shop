@@ -20,7 +20,7 @@ public class Item {
 
 	
 
-	public Item(String item_name, int item_id, int quantity, String discription, double origen_price, double sale_price) {
+	public Item(String item_name, int item_id, int quantity, String discription, double origen_price, double sale_price, int cat_id) {
 		super();
 		this.item_id = item_id;
 		this.item_name = item_name;

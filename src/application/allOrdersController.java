@@ -98,7 +98,7 @@ public class allOrdersController {
 		boolean isType = false;
 		if (dateFrom.getValue() == (null) && !(dateTo.getValue() == (null))
 				|| !(dateFrom.getValue() == (null)) && dateTo.getValue() == (null)) {
-			Message.displayMassage("please put 'date from' and 'date to' together", "warning");
+			Message.displayMassage("please put 'date from' and 'date to' together", "error");
 			return;
 		}
 		SQL = "select * from invoice ";
@@ -167,8 +167,8 @@ public class allOrdersController {
 			ResultSet rs = state.executeQuery(SQL);
 			while (rs.next()) {
 
-		invoiceData it = new invoiceData(rs.getInt(1),rs.getInt(2) , rs.getDouble(3), rs.getInt(4),
-						rs.getInt(5), rs.getString(6),rs.getInt(7));
+		invoiceData it = new invoiceData(rs.getInt(1),rs.getInt(2), rs.getDouble(3), rs.getInt(4),
+						rs.getInt(5), rs.getString(6),rs.getInt(7), rs.getString(8));
 
 				dataList.add(it);
 
@@ -193,7 +193,7 @@ public class allOrdersController {
 			Parent root;
 			stage = (Stage) btnback.getScene().getWindow();
 			stage.close();
-			root = FXMLLoader.load(getClass().getResource("chooseOrder.fxml"));
+			root = FXMLLoader.load(getClass().getResource("chooseOrders.fxml"));
 			Scene scene = new Scene(root, 901, 649);
 			stage.setScene(scene);
 			stage.setTitle("Choose order");
@@ -243,7 +243,7 @@ public class allOrdersController {
 				Parent root;
 				stage = (Stage) openOrder.getScene().getWindow();
 				stage.close();
-				root = FXMLLoader.load(getClass().getResource("order.fxml"));
+				root = FXMLLoader.load(getClass().getResource("Order.fxml"));
 				Scene scene = new Scene(root, 951, 781);
 				stage.setScene(scene);
 				stage.setTitle("Orders");
@@ -252,14 +252,14 @@ public class allOrdersController {
 			} catch (IOException e1) {
 			}
 		} else {
-			Message.displayMassage("Please Put Order Number", "warning");
+			Message.displayMassage("Please Put Order Number", "error");
 		}
 	}
 
 	@FXML
 	void showStattics(ActionEvent event) {
 
-		if (Manager.mng.getName().equals("khalid masalmah")) {
+		if (Manager.mng.getName().equals("khalid")) {
 			Scene scene;
 			Stage stage = null;
 			try { // open new stage
@@ -274,7 +274,7 @@ public class allOrdersController {
 			} catch (IOException e1) {
 			}
 		} else {
-			Message.displayMassage("You do not have permission to access", "warning");
+			Message.displayMassage("You do not have permission to access", "error");
 		}
 	}
 

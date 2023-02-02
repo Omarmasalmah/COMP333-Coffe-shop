@@ -75,8 +75,8 @@
                   <Image url="@../../images/delete.png" />
                </image>
             </ImageView>
-            <Button fx:id="cancelOrdre" contentDisplay="RIGHT" layoutX="439.0" layoutY="640.0" mnemonicParsing="false" onAction="#CancelOrder" prefHeight="40.0" prefWidth="152.0" styleClass="button2" stylesheets="@application.css" text="      Cancel Order" />
-            <ImageView fitHeight="40.0" fitWidth="50.0" layoutX="446.0" layoutY="640.0" pickOnBounds="true" preserveRatio="true">
+            <Button fx:id="cancelOrdre" contentDisplay="RIGHT" layoutX="423.0" layoutY="625.0" mnemonicParsing="false" onAction="#CancelOrder" prefHeight="40.0" prefWidth="152.0" styleClass="button2" stylesheets="@application.css" text="      Cancel Order" />
+            <ImageView fitHeight="40.0" fitWidth="50.0" layoutX="430.0" layoutY="625.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/cancel.png" />
                </image>

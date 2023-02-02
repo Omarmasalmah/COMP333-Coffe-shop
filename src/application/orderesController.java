@@ -1,9 +1,12 @@
 package application;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -11,6 +14,8 @@ import java.util.ArrayList;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -53,29 +58,29 @@ public class orderesController {
     private Button cancelOrdre;
 
     @FXML
-    private TableColumn<invoiceData, Number> counter;
+    private TableColumn<invoiceData, Integer> counter;
 
     @FXML
     private Button deleteItem;
 
 
     @FXML
-    private TableColumn<invoiceData, Number> itemCategory;
+    private TableColumn<invoiceData, Integer> itemCategory;
 
     @FXML
     private TableColumn<invoiceData, String> itemName;
 
     @FXML
-    private TableColumn<invoiceData, Number> itemParcode;
+    private TableColumn<invoiceData, Integer> itemParcode;
 
     @FXML
     private TableColumn<invoiceData, Double> itemPrice;
 
     @FXML
-    private TableColumn<invoiceData, Number> itemQuantity;
+    private TableColumn<invoiceData, Integer> itemQuantity;
 
     @FXML
-    private TableColumn<invoiceData, Number> itembyEmployee;
+    private TableColumn<invoiceData, Integer> itembyEmployee;
 
     @FXML
     private Label orderID;
@@ -175,8 +180,8 @@ public class orderesController {
 			Parent root;
 			stage = (Stage) btnback.getScene().getWindow();
 			stage.close();
-			root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-			Scene scene = new Scene(root, 901, 649);
+			root = FXMLLoader.load(getClass().getResource("chooseOrders.fxml"));
+			Scene scene = new Scene(root, 369, 474);
 			stage.setScene(scene);
 			stage.setTitle("Choose One");
 			stage.show();
@@ -199,16 +204,16 @@ public class orderesController {
 	}
 
 	private void deleteRow(invoiceData row) {
-		priceToShow -= (row.getFull_sale_price() * row.getQuantity());
+		priceToShow -= (row.getSale_price() * row.getQuantity());
 
 		try {
 			connector.a.connectDB();
-//			System.out.println("delete from invoice where  order_id=" + row.getOrder_id() + " and par_code="
+//			System.out.println("delete from invoice where  order_id=" + row.getOrder_id() + " and item_id="
 //					+ row.getPar_code() + ";");
-			connector.a.ExecuteStatement("delete from invoice where  order_id=" + row.getOrder_id() + " and par_code="
+			connector.a.ExecuteStatement("delete from invoice where  order_id=" + row.getOrder_id() + " and item_id="
 					+ row.getItem_id() + ";");
 			PreparedStatement st2 = connector.a.connectDB()
-					.prepareStatement("select * from item where par_code=" + row.getItem_id() + ";");
+					.prepareStatement("select * from item where item_id=" + row.getItem_id() + ";");
 			ResultSet r2 = st2.executeQuery();
 			if (r2.next()) {
 //				System.out.println("name >>" + r2.getString(1));
@@ -231,11 +236,194 @@ public class orderesController {
 
 		initialize();
     }
+	
+	private void updateQuantity(int id1, int id2, int newValue, int oldValue) {
+		try {
+			connector.a.connectDB();
+
+			PreparedStatement st2 = connector.a.connectDB()
+					.prepareStatement("select * from item where item_id=" + id1 + ";");
+			ResultSet r2 = st2.executeQuery();
+			if (r2.next()) {
+//				System.out.println("name >>" + r2.getString(1));
+//				System.out.println("id >>" + r2.getInt(2));
+//				System.out.println("quant >>" + r2.getInt(3));
+//				System.out.println("seal price >>" + r2.getDouble(5));
+//				System.out.println("orginal price >>" + r2.getDouble(6));
+
+			}
+
+			if (r2.getInt(3) - (newValue - oldValue) >= 0) {
+				connector.a.ExecuteStatement("update invoice set quantity = " + newValue + " where order_id = " + id2
+						+ " and item_id = " + id1 + ";");
+				connector.a.ExecuteStatement("update item set quantity = " + (r2.getInt(3) - (newValue - oldValue))
+						+ " where item_id = " + r2.getInt(2) + "' and cat_id = " + r2.getInt(7) + ";");
+			} else {
+				if (r2.getInt(3) > 0) {
+					Message.displayMassage(
+							"There is not enough quantity of this product!\r\n" + "There is only: " + r2.getInt(3),
+							"warning");
+				} else {
+					Message.displayMassage("out of stock !", "warning");
+
+				}
+			}
+
+			connector.a.connectDB().close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		initialize();
+
+	}
+	
 
     @FXML
     void print(ActionEvent event) {
 
-    }
+    	DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+		java.util.Date myDate = null;
+		@SuppressWarnings("unused")
+		java.sql.Date sqlDate;
+		try {
+			myDate = formatter.parse(dtf.format(now));
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		sqlDate = new java.sql.Date(myDate.getTime());
+		String type = "";
+		try {
+
+			connector.a.connectDB();
+			String sql = "insert into orders(order_id,order_date) value(?,?);";
+			PreparedStatement ps = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
+			ps.setInt(1, orderId);
+			ps.setTimestamp(2, new java.sql.Timestamp(myDate.getTime()));
+			ps.execute();
+			connector.a.connectDB().close();
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (!allOrdersController.isOpen) {
+			try {
+				connector.a.connectDB();
+				String sql = "insert into invoice(order_id,order_date,sale_price,emp_id) value(?,?,?,?);";
+				PreparedStatement ps = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
+				ps.setInt(1, orderId);
+				ps.setTimestamp(8, new java.sql.Timestamp(myDate.getTime()));
+				ps.setDouble(3, priceToShow);
+				ps.setInt(6, sign_inController.empId);
+				ps.execute();
+				connector.a.connectDB().close();
+
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			try {
+//				System.out.println("okkk");
+				connector.a.connectDB();
+				connector.a.ExecuteStatement(
+						"update invocice set sale_price = " + priceToShow + ", emp_id = " + sign_inController.empId 
+						+ " where order_id = " + orderId + " ;");
+				connector.a.connectDB().close();
+
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		toFile += "============================================" + "\n";
+		toFile += "Total Amount :=> " + priceToShow + " $" + "\n";
+		toFile += "____________________________________________" + "\n";
+		toFile += "customer info. >>" + "\n";
+		toFile += "Name : " + cusName + "\n";
+		toFile += "ID : " + cusId + "\n";
+		
+		String fileName = "Order_" + orderId + ".txt";
+		
+		try {
+
+			FileWriter writerFile = new FileWriter(fileName);
+			writerFile.write(toFile);
+			writerFile.close();
+		} catch (IOException e) {
+			Message.displayMassage("An error occurred.", "error");
+			e.printStackTrace();
+		}
+		try { // open new stage
+			Stage stage;
+			Parent root;
+			stage = (Stage) cancelOrdre.getScene().getWindow();
+			stage.close();
+			root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+			Scene scene = new Scene(root, 901, 649);
+			stage.setScene(scene);
+			stage.setTitle("Choose One");
+			stage.show();
+
+		} catch (IOException e1) {
+			Message.displayMassage("Error In file ", "error");
+		}
+
+		try {
+			ProcessBuilder pb = new ProcessBuilder("Notepad.exe", fileName);
+			pb.start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		allOrdersController.isOpen = false;
+		Message.displayMassage("The invoice has been printed successfully", "ok");
+
+	}
+    
+    
+    
+    
+    private void searchRentalEmployee() {
+		FilteredList<invoiceData> filteredData = new FilteredList<>(dataList, b -> true);
+		search.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(invoice -> {
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+				String lowerCaseFilter = newValue.toLowerCase();
+				if (String.valueOf(invoice.getItem_id()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true; // Filter matches car Id
+				} else if (invoice.getItemName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true; // Filter matches password
+				} else if (String.valueOf(invoice.getItemCat()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true; // Filter matches password
+				} else
+					return false; // Does not match.
+			});
+		});
+		SortedList<invoiceData> sortedData = new SortedList<>(filteredData);
+		sortedData.comparatorProperty().bind(TableData.comparatorProperty());
+		TableData.setItems(sortedData);
+	}
+    
     
     @FXML
 	public void initialize() {
@@ -270,16 +458,17 @@ public class orderesController {
 		dataList = FXCollections.observableArrayList(data);
 		TableData.setEditable(true);
 		counter.setSortable(false);
-		counter.setCellValueFactory(column -> new ReadOnlyObjectWrapper<Number>(TableData.getItems().indexOf(column.getValue()) + 1));
-		itemParcode.setCellFactory(new PropertyValueFactory<invoiceData, Integer>("item_id"));
+		counter.setCellValueFactory(column -> new ReadOnlyObjectWrapper<Integer>(TableData.getItems().indexOf(column.getValue()) + 1));
+		itemParcode.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("item_id"));
+		
 		itemName.setCellValueFactory(new PropertyValueFactory<invoiceData, String>("itemName"));
 		itemQuantity.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("quantity"));
 		itemQuantity.setCellFactory(TextFieldTableCell.<invoiceData, Integer>forTableColumn(new IntegerStringConverter()));
-		itemQuantity.setOnEditCommit((CellEditEvent<invoiceData, Integer> t) -> {
+		itemQuantity.setOnEditStart((CellEditEvent<invoiceData, Integer> t) -> {
 			int old = t.getOldValue();
 			((invoiceData) t.getTableView().getItems().get(t.getTablePosition().getRow())).setQuantity(t.getNewValue()); // display
 			// only
-//			System.out.println(t.getRowValue().getPar_code());
+			System.out.println(t.getRowValue().getItem_id());
 
 			updateQuantity(t.getRowValue().getItem_id(), t.getRowValue().getOrder_id(), t.getNewValue(), old);
 		});
@@ -288,8 +477,7 @@ public class orderesController {
 
 		itembyEmployee.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("emp_id"));
 		getData();
-		priceBefore.setText(priceToShow + " $");
-		price.setText(priceWithDisc + " $");
+		price.setText(priceToShow + " $");
 		TableData.setItems(dataList);
 
 		searchRentalEmployee();
@@ -310,7 +498,6 @@ public class orderesController {
 			connector.a.connectDB();
 			java.sql.Statement state = connector.a.connectDB().createStatement();
 			ResultSet rs = state.executeQuery(SQL);
-//			ResultSet ord = state.executeQuery(od);
 			int counter = 1;
 			toFile = "";
 			toFile += "\t" + "Sinjel Cafe" + "\n";
@@ -330,14 +517,12 @@ public class orderesController {
 					ResultSet rs3 = state3.executeQuery(od);
 					if (rs3.next()) {
 
-					invoiceData it = new invoiceData(orderId, rs.getInt(1),rs.getDouble(2),rs.getInt(3), rs2.getInt(7), rs2.getString(2), rs3.getInt(2));
+					invoiceData it = new invoiceData(orderId, rs.getInt(1),rs.getDouble(2),rs.getInt(3), rs2.getInt(7), rs2.getString(2), rs3.getInt(2), rs3.getString(3));
 						dataList.add(it);
 						toFile += counter + "| " + rs2.getString(1) + " | " + rs.getInt(1) + " | "
 								+ (rs.getInt(1) * rs.getDouble(2)) + "\n";
 						toFile += "-------------------------------------------" + "\n";
 						priceToShow += (rs.getDouble(2) * rs.getInt(1));
-//						System.out.println(">>" + (priceToShow * disc));
-//						System.out.println("$ :" + priceWithDisc);
 					}
 				}
 				counter++;

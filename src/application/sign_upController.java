@@ -57,17 +57,18 @@ public class sign_upController {
 		try {
 		rc = new Employee(txtName.getText(), datefield.getValue().toString(), Integer.parseInt(txtphone.getText()),
 				txtPassword.getText(), dateOFworkfield.getValue().toString(), Double.parseDouble(txtsalary.getText()));
-        
 		Employee.emd=rc;
 		insertData(rc);
 		txtName.clear();
 		txtPassword.clear();
 		txtphone.clear();
 		txtsalary.clear();
+
 		}
 		catch (Exception e) {
 		     showDialog(null, "Wrong input!!", "Please check the input again", AlertType.ERROR);   
 		}
+		button_Login(event);
 	}
 	public void showDialog(String title, String header, String body, AlertType type) {
 		Alert alert = new Alert(type); // infotrmation or error or..
@@ -108,7 +109,7 @@ public class sign_upController {
 //					+ rc.getId() + ",'" + rc.getEmployee_name() + "','" + sqlDate + "','" + sqlDate2 + "')");
 
 			connector.a.connectDB();
-			String sql = "Insert into employee (employee_name,birthday,phone,emp_password,date_of_employment,amount_paid) values(?,?,?,?,?,?)";
+			String sql = "Insert into employee (employee_name,birthday,emp_phone,emp_password,date_of_employment,amount_paid) values(?,?,?,?,?,?)";
 			PreparedStatement ps = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
 			ps.setString(4, rc.getEmp_password());
 			ps.setString(1, rc.getEmployee_name());
@@ -124,7 +125,7 @@ public class sign_upController {
 			e.printStackTrace();
 		}
 		
-			String SQL = "select id from employee where employee_name='" + rc.getEmployee_name()
+			String SQL = "select emp_id from employee where employee_name='" + rc.getEmployee_name()
 					+ "' and emp_password='" + rc.getEmp_password() + "';";
 			try {
 				connector.a.connectDB();

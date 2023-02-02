@@ -104,7 +104,7 @@ public class orderesController {
 			if (!allOrdersController.isOpen) {
 				connector.a.connectDB();
 				connector.a.ExecuteStatement("delete from  invoice where order_id =" + orderId + ";");
-				connector.a.ExecuteStatement("delete from  orderes where order_id =" + orderId + ";");
+				connector.a.ExecuteStatement("delete from  orders where order_id =" + orderId + ";");
 				connector.a.connectDB().close();
 			} else {
 				allOrdersController.isOpen = false;
@@ -165,7 +165,7 @@ public class orderesController {
 			if (!allOrdersController.isOpen) {
 				connector.a.connectDB();
 				connector.a.ExecuteStatement("delete from  invoice where order_id =" + orderId + ";");
-				connector.a.ExecuteStatement("delete from  orderes where order_id =" + orderId + ";");
+				connector.a.ExecuteStatement("delete from  orders where order_id =" + orderId + ";");
 				connector.a.connectDB().close();
 			} else {
 				allOrdersController.isOpen = false;
@@ -341,7 +341,7 @@ public class orderesController {
 //				System.out.println("okkk");
 				connector.a.connectDB();
 				connector.a.ExecuteStatement(
-						"update invocice set sale_price = " + priceToShow + ", emp_id = " + sign_inController.empId 
+						"update invoice set sale_price = " + priceToShow + ", emp_id = " + sign_inController.empId 
 						+ " where order_id = " + orderId + " ;");
 				connector.a.connectDB().close();
 
@@ -433,7 +433,7 @@ public class orderesController {
 				PreparedStatement st2;
 				try {
 					connector.a.connectDB();
-					String sql = "insert into orders(id) value(?);";
+					String sql = "insert into orders(order_id) value(?);";
 					PreparedStatement ps = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
 					ps.setInt(1, sign_inController.empId);
 					ps.execute();

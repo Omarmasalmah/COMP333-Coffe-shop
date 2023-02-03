@@ -15,13 +15,14 @@ CREATE TABLE employee (
     emp_phone VARCHAR(255), 
     emp_password VARCHAR(30),
     date_of_employment DATE,
-  
     amount_paid REAL
 );
 
 CREATE TABLE orders (
     order_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    order_date DATE
+    order_date DATE,
+    emp_id INT,
+     FOREIGN KEY (emp_id) REFERENCES employee (emp_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE categores (
     cat_id INT PRIMARY KEY NOT NULL,
@@ -32,18 +33,24 @@ CREATE TABLE categores (
 CREATE TABLE items (
     item_id INT PRIMARY KEY NOT NULL,
     item_name VARCHAR(30),
-     sale_price REAL,
+	sale_price REAL,
     origen_price REAL,
     quantity INT,
-    discription VARCHAR(70)
+    discription VARCHAR(70),
+    size VARCHAR(2),
+	cat_id INT,
+    FOREIGN KEY (cat_id) REFERENCES categores(cat_id)
+    
     );
 
 CREATE TABLE employee_item (
     emp_id INT,
     item_id INT,
+	cat_id INT,
     PRIMARY KEY (emp_id, item_id),
     FOREIGN KEY (emp_id) REFERENCES employee(emp_id),
     FOREIGN KEY (item_id) REFERENCES items(item_id)
+
 );
 
 CREATE TABLE employee_order (
@@ -89,9 +96,12 @@ CREATE TABLE customer_feedback (
 
 CREATE TABLE invoice (
     order_id INT, 
+	order_date Date,
     item_id INT NOT NULL,
     quantity INT,
     sale_price REAL,
+    original_price REAL,
+    profits REAL,
    
     PRIMARY KEY (item_id , order_id),
     FOREIGN KEY (order_id)
@@ -103,7 +113,9 @@ CREATE TABLE invoice (
 );
 
 insert into employee (employee_name,birthday,emp_phone,date_of_employment,emp_password) value ("Khalid",'2000-08-2','0592501178','2020-03-15',"admin");
-
+insert into caegores (cat_id,categores_name) value (203,"مشروبات");
+insert into items (item_id,item_name,sale_price,origen_price,size,cat_id) value (1,"ice coffe",4,5,'M',203);
+ 
  show tables; 
       select * from customer_feedback;
       select * from customer_order;

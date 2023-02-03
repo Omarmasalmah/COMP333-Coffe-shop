@@ -6,6 +6,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,121 +15,160 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="759.0" prefWidth="1364.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.itemController">
+<BorderPane prefHeight="773.0" prefWidth="1051.0" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <top>
-		<AnchorPane prefHeight="759.0" prefWidth="1220.0" styleClass="photo" stylesheets="@application.css" BorderPane.alignment="CENTER">
+		<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="773.0" prefWidth="949.0" styleClass="pic" stylesheets="@application.css" BorderPane.alignment="CENTER">
 			<children>
-				<TableView fx:id="TableData" layoutX="3.0" layoutY="75.0" prefHeight="307.0" prefWidth="1136.0">
+				<TableView fx:id="TableData" layoutX="9.0" layoutY="107.0" prefHeight="319.0" prefWidth="1037.0">
 					<columns>
-						<TableColumn fx:id="par_codeColumn" prefWidth="83.0" text="Par Code" />
-						<TableColumn fx:id="item_nameColumn" prefWidth="94.0" text="Item Name" />
-						<TableColumn fx:id="quantityColumn" prefWidth="81.0" text="Quantity" />
-                  <TableColumn fx:id="discriptionColumn" prefWidth="392.0" text="Discription" />
-                  <TableColumn fx:id="sale_priceColumn" prefWidth="79.0" text="Sale Price" />
-                  <TableColumn fx:id="origen_priceColumn" prefWidth="98.0" text="Origen Price" />
-                  <TableColumn fx:id="provide_company_nameColumn" prefWidth="122.0" text="Company Name" />
-                  <TableColumn fx:id="cat_idColumn" prefWidth="95.0" text="Category Id" />
-                  <TableColumn fx:id="ExpDateColumn" prefWidth="95.0" text="Exp Date" />
+						<TableColumn fx:id="IDColumn" prefWidth="101.0" text="ID " />
+						<TableColumn fx:id="NameColumn" prefWidth="212.0" text="Name" />
+						<TableColumn fx:id="DateBirthColumn" prefWidth="191.0" text="Date Of Birth" />
+						<TableColumn fx:id="dateofemploymentColumn" minWidth="0.0" prefWidth="171.0" text="Date Of Employment" />
+                  <TableColumn fx:id="PassColumn" prefWidth="133.0" text="Password" />
+                  <TableColumn fx:id="H_PriceColumn" prefWidth="108.0" text="Hour Price" />
+                  <TableColumn fx:id="W_HourColoumn" prefWidth="117.0" text="Work Hours" />
 					</columns>
 					<opaqueInsets>
 						<Insets />
 					</opaqueInsets>
 				</TableView>
-				<Button fx:id="Update" layoutX="928.0" layoutY="478.0" mnemonicParsing="false" onAction="#updateOnAction" prefHeight="47.0" prefWidth="118.0" styleClass="dark-blue" stylesheets="@application.css" text="Update">
+				<AnchorPane layoutX="175.0" layoutY="22.0" />
+				<Button fx:id="Update" layoutX="877.0" layoutY="490.0" mnemonicParsing="false" onAction="#updateOnAction" prefHeight="35.0" prefWidth="104.0" styleClass="dark-blue" stylesheets="@application.css" text="Update">
                <graphic>
-                  <ImageView fitHeight="27.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="27.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../Icons/updateLOGO.png" />
+                        <Image url="@../../updateLOGO.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
-				<Label layoutX="268.0" layoutY="413.0" prefHeight="23.0" prefWidth="126.0" text="Update Item: " textFill="WHITE">
+				<Label layoutX="226.0" layoutY="433.0" prefHeight="33.0" prefWidth="225.0" text="Update Employee: ">
 					<font>
-						<Font name="Arial Bold" size="18.0" />
+						<Font name="Arial Bold" size="20.0" />
 					</font>
-				</Label>
-				<TextField fx:id="oldParcode" layoutX="394.0" layoutY="409.0" prefHeight="31.0" prefWidth="102.0" promptText="Old Parcode" />
-				<TextField fx:id="newParcode" layoutX="199.0" layoutY="450.0" prefHeight="31.0" prefWidth="108.0" promptText="New Parcode" />
-				<TextField fx:id="newName" layoutX="311.0" layoutY="450.0" prefHeight="28.0" prefWidth="103.0" promptText="New Name" />
-				<TextField fx:id="NewQuantity" layoutX="423.0" layoutY="450.0" prefHeight="31.0" prefWidth="114.0" promptText="New Quantity" />
-				<Label layoutX="273.0" layoutY="37.0" prefHeight="17.0" prefWidth="123.0" style="-fx-underline: true;" styleClass="text" stylesheets="@application.css" text="Search For Item">
-					<font>
-						<Font name="Arial Bold" size="15.0" />
-					</font>
-				</Label>
-				<TextField fx:id="SearchFiled" layoutX="398.0" layoutY="30.0" prefHeight="26.0" prefWidth="254.0" promptText="Search Full Name Or Parcode" />
-				<TextField fx:id="DeleteParcode" layoutX="115.0" layoutY="532.0" prefHeight="26.0" prefWidth="96.0" promptText="Parcode" />
-				<Button fx:id="Delete" layoutX="462.0" layoutY="530.0" mnemonicParsing="false" onAction="#deleteOnAction" prefHeight="43.0" prefWidth="118.0" styleClass="dark-blue" stylesheets="@application.css" text="Delete">
                <graphic>
-                  <ImageView fitHeight="28.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="33.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../Icons/delete.png" />
+                        <Image url="@../../icon-for-update.jpg" />
                      </image>
                   </ImageView>
-               </graphic></Button>
-				<Line endX="853.0" layoutX="186.0" layoutY="524.0" startX="-174.99998474121094" stroke="#777272" />
-				<Label layoutX="10.0" layoutY="537.0" prefHeight="21.0" prefWidth="105.0" text="Delete Item:" textFill="WHITE">
-					<font>
-						<Font name="Arial Bold" size="18.0" />
-					</font>
+               </graphic>
 				</Label>
-				<Label layoutX="20.0" layoutY="598.0" prefHeight="25.0" prefWidth="105.0" text="Add Item:" textFill="WHITE">
-					<font>
-						<Font name="Arial Bold" size="21.0" />
-					</font>
-				</Label>
-				<TextField fx:id="addParcode" layoutX="125.0" layoutY="595.0" prefHeight="31.0" prefWidth="116.0" promptText="New Parcode" />
-				<TextField fx:id="addQuantity" layoutX="363.0" layoutY="595.0" prefHeight="26.0" prefWidth="127.0" promptText="New Quantity" />
-				<Button fx:id="add" layoutX="11.0" layoutY="629.0" mnemonicParsing="false" onAction="#addOnAction" prefHeight="42.0" prefWidth="92.0" styleClass="dark-blue" stylesheets="@application.css" text="Add">
-               <graphic>
-                  <ImageView fitHeight="22.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Icons/icons8-add-48.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-				<Label layoutY="440.0" prefHeight="21.0" prefWidth="194.0" text="(Enter Any Field To Update)" textFill="WHITE">
+				<TextField fx:id="oldID" layoutX="465.0" layoutY="434.0" prefHeight="26.0" prefWidth="96.0" promptText="Old ID" style="-fx-background-color: gray;" styleClass="text1" stylesheets="@application.css" />
+				<TextField fx:id="newName" layoutX="29.0" layoutY="493.0" prefHeight="31.0" prefWidth="102.0" promptText="New Name" style="-fx-background-color: gray; -fx-text-fill: white;" styleClass="text1" stylesheets="@application.css" />
+				<TextField fx:id="newDateBirth" layoutX="138.0" layoutY="493.0" prefHeight="31.0" prefWidth="125.0" promptText="New Date Birth" style="-fx-background-color: gray;" styleClass="text1" stylesheets="@application.css" />
+				<TextField fx:id="Newdateofemployment" layoutX="273.0" layoutY="493.0" prefHeight="31.0" prefWidth="194.0" promptText="New Date Of Employment" style="-fx-background-color: gray;" styleClass="text1" stylesheets="@application.css" />
+            <TextField fx:id="SearchFiled" layoutX="797.0" layoutY="17.0" prefHeight="36.0" prefWidth="239.0" promptText="Search by id or employee name" style="-fx-text-fill: Black; -fx-border-color: blue; -fx-border-radius: 20; -fx-background-radius: 20;">
                <font>
-                  <Font name="Bell MT" size="16.0" />
-               </font></Label>
-            <TextField fx:id="newDiscription" layoutX="198.0" layoutY="484.0" prefHeight="34.0" prefWidth="695.0" promptText="New Discription" />
-            <TextField fx:id="NewSalePrice" layoutX="545.0" layoutY="450.0" prefHeight="31.0" prefWidth="118.0" promptText="New Sale Price" />
-            <TextField fx:id="NewOrigenPrice" layoutX="670.0" layoutY="450.0" prefHeight="31.0" prefWidth="135.0" promptText="New Origen Price" />
-            <Line endX="706.0" endY="-63.0" layoutX="342.0" layoutY="646.0" startX="-342.0" startY="-63.0" stroke="WHITE" />
-            <TextField fx:id="addName" layoutX="253.0" layoutY="595.0" prefHeight="28.0" prefWidth="103.0" promptText="New Name" />
-            <TextField fx:id="AddSalePrice" layoutX="496.0" layoutY="595.0" prefHeight="31.0" prefWidth="122.0" promptText="New Sale Price" />
-            <TextField fx:id="AddCompanyName" layoutX="783.0" layoutY="595.0" prefHeight="31.0" prefWidth="159.0" promptText="New Company Name" />
-            <TextField fx:id="AddOrigenPrice" layoutX="627.0" layoutY="595.0" prefHeight="31.0" prefWidth="148.0" promptText="New Origen Price" />
-            <TextField fx:id="AddCatId" layoutX="122.0" layoutY="633.0" prefHeight="31.0" prefWidth="122.0" promptText="New Category ID" />
-            <TextField fx:id="AddDiscription" layoutX="253.0" layoutY="632.0" prefHeight="33.0" prefWidth="783.0" promptText="New Discription" />
-            <Button fx:id="BackButton" layoutX="11.0" layoutY="24.0" mnemonicParsing="false" onAction="#back" prefHeight="43.0" prefWidth="103.0" styleClass="button2" stylesheets="@application.css" text="Back" textAlignment="CENTER">
-               <graphic>
-                  <ImageView fitHeight="31.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Icons/icons8-back-64.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <TextField fx:id="DeleteCompanyName" layoutX="219.0" layoutY="532.0" prefHeight="31.0" prefWidth="129.0" promptText="Company Name" />
-            <TextField fx:id="DeleteCatId" layoutX="352.0" layoutY="532.0" prefHeight="31.0" prefWidth="101.0" promptText="Category ID" />
-            <TextField fx:id="OldCompanyName" layoutX="502.0" layoutY="409.0" prefHeight="31.0" prefWidth="155.0" promptText="Old Company Name" />
-            <TextField fx:id="OldCatId" layoutX="663.0" layoutY="409.0" prefHeight="31.0" prefWidth="131.0" promptText="Old Category ID" />
-            <Button fx:id="Refresh" layoutX="162.0" layoutY="26.0" mnemonicParsing="false" onAction="#refresh" prefHeight="39.0" prefWidth="99.0" styleClass="button_small" stylesheets="@application.css" text="Refresh" textFill="WHITE">
-               <graphic>
-                  <ImageView fitHeight="28.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Icons/icons8-refresh-32.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <TextField fx:id="NewExpDate" layoutX="811.0" layoutY="451.0" prefHeight="31.0" prefWidth="117.0" promptText="New Exp Date" />
-            <TextField fx:id="AddExpDate" layoutX="949.0" layoutY="596.0" prefHeight="31.0" prefWidth="128.0" promptText="New Exp Date" />
-            <Button fx:id="ShowExpiredItems" layoutX="712.0" layoutY="31.0" mnemonicParsing="false" onAction="#filter" text="Show Expired Items" />
-            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="657.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                  <Font size="13.0" />
+               </font></TextField>
+            <ImageView fitHeight="29.0" fitWidth="37.0" layoutX="994.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Icons/searchLOGO.png" />
+                  <Image url="@../../searchLOGO.png" />
                </image>
             </ImageView>
+				<TextField fx:id="ID" layoutX="251.0" layoutY="551.0" prefHeight="33.0" prefWidth="98.0" promptText="ID" style="-fx-background-color: gray;" styleClass="text1" stylesheets="@application.css" />
+				<Button fx:id="Delete" layoutX="370.0" layoutY="551.0" mnemonicParsing="false" onAction="#deleteOnAction" prefHeight="25.0" prefWidth="103.0" styleClass="dark-blue" stylesheets="@application.css" text="Delete">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../delete.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+				<Line endX="867.0" layoutX="177.0" layoutY="536.0" startX="-174.99998474121094" stroke="#777272" />
+				<Label layoutX="34.0" layoutY="548.0" prefHeight="38.0" prefWidth="208.0" text="Delete Employee:">
+					<font>
+						<Font name="Arial Bold" size="18.0" />
+					</font>
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="137.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons8-cancel-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+				</Label>
+				<Line endX="869.0" layoutX="182.0" layoutY="600.0" startX="-185.99998474121094" />
+			   <Button fx:id="Delete2" contentDisplay="RIGHT" layoutX="494.0" layoutY="546.0" mnemonicParsing="false" onAction="#deleteOnAction2" prefHeight="31.0" prefWidth="221.0" styleClass="button2" stylesheets="@application.css" text="Delete selected Row  ">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../delete.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+			   <Button fx:id="add" layoutX="451.0" layoutY="613.0" mnemonicParsing="false" onAction="#addOnAction" prefHeight="37.0" prefWidth="153.0" styleClass="dark-blue" stylesheets="@application.css" text="Add Employee">
+               <graphic>
+                  <ImageView fitHeight="33.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../addLogo.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+				<Label layoutX="14.0" layoutY="466.0" text="(Enter Any Field To Update)">
+               <font>
+                  <Font name="Bell MT Bold" size="17.0" />
+               </font></Label>
+            <Button fx:id="btnback" layoutX="9.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" prefHeight="39.0" prefWidth="92.0" styleClass="button2" stylesheets="@application.css" text="Back">
+               <graphic>
+                  <ImageView fitHeight="111.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons8-back-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <ToggleButton fx:id="Hourly_Emp" layoutX="370.0" layoutY="22.0" mnemonicParsing="false" onAction="#btnHourly_Emp" prefHeight="44.0" prefWidth="146.0" selected="true" styleClass="toggle-button1" stylesheets="@application.css" text="Hourly Employee">
+               <toggleGroup>
+                  <ToggleGroup fx:id="EmpType" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton fx:id="Contrect_Emp" layoutX="516.0" layoutY="22.0" mnemonicParsing="false" onAction="#btnContrect_Emp" prefHeight="44.0" prefWidth="146.0" styleClass="toggle-button2" stylesheets="@application.css" text="Contrect Employee" toggleGroup="$EmpType" />
+            <TextField fx:id="newPass" layoutX="471.0" layoutY="493.0" prefHeight="31.0" prefWidth="118.0" promptText="New Password" style="-fx-background-color: gray;" styleClass="text1" stylesheets="@application.css" />
+            <TextField fx:id="newWHour" layoutX="734.0" layoutY="493.0" prefHeight="31.0" prefWidth="125.0" promptText="New Work Hour" style="-fx-background-color: gray;" styleClass="text1" stylesheets="@application.css" />
+            <TextField fx:id="newHPrice" layoutX="599.0" layoutY="493.0" prefHeight="31.0" prefWidth="126.0" promptText="New Hour Prise" style="-fx-background-color: gray;" styleClass="text1" stylesheets="@application.css" />
+            <Button layoutX="994.0" layoutY="66.0" mnemonicParsing="false" onAction="#btnRefresh" prefHeight="27.0" prefWidth="32.0" styleClass="button_small" stylesheets="@application.css">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../refreshLOGO.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Line endX="854.0" layoutX="189.0" layoutY="664.0" startX="-185.99998474121094" />
+            <Label fx:id="labelDaily" layoutX="34.0" layoutY="675.0" prefHeight="37.0" prefWidth="314.0" style="-fx-background-color: #00ffff; -fx-background-radius: 20;" text=" Daily salary for the selected row">
+               <font>
+                  <Font size="21.0" />
+               </font></Label>
+            <Label fx:id="DailySalary" layoutX="104.0" layoutY="723.0" prefHeight="36.0" prefWidth="143.0" style="-fx-border-color: #00ffff; -fx-background-radius: 20;">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dollar-symbol.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="labelTotal" layoutX="616.0" layoutY="675.0" prefHeight="37.0" prefWidth="407.0" style="-fx-background-color: #00ffff; -fx-background-radius: 20;" text="  Total hourly employee salaries in one day">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalSalary" layoutX="746.0" layoutY="723.0" prefHeight="36.0" prefWidth="147.0" style="-fx-border-color: #00ffff; -fx-background-radius: 20;">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dollar-symbol.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
 
 			</children>
 		</AnchorPane>

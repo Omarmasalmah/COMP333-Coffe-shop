@@ -10,8 +10,8 @@ public class Item {
 	private double origen_price;
 	private double sale_price;
 	private int cat_id;
+	private String size;
 
-	
 	
 	
 	public Item() {
@@ -20,7 +20,7 @@ public class Item {
 
 	
 
-	public Item(String item_name, int item_id, int quantity, String discription, double origen_price, double sale_price, int cat_id) {
+	public Item(String item_name, int item_id, int quantity, String discription, double origen_price, double sale_price, int cat_id, String size) {
 		super();
 		this.item_id = item_id;
 		this.item_name = item_name;
@@ -29,8 +29,8 @@ public class Item {
 		this.origen_price = origen_price;		
 		this.sale_price = sale_price;
 		this.cat_id = cat_id;
+		this.size = size;
 
-		
 	}
 
 
@@ -97,6 +97,19 @@ public class Item {
 	public void setCat_id(int cat_id) {
 		this.cat_id = cat_id;
 	}
+
+
+
+	public String getSize() {
+		return size;
+	}
+
+
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+	
 	
 
 }

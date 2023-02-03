@@ -54,9 +54,7 @@ public class allOrdersController {
 	private TableColumn<invoiceData, Double> price;
 	@FXML
 	private TableColumn<invoiceData, String> date;
-	@FXML
-	private TableColumn<invoiceData, String> bill_type;
-
+	
 	@FXML
 	private TextField by_emp_search;
 	@FXML
@@ -108,19 +106,13 @@ public class allOrdersController {
 		}
 
 		if (dateFrom.getValue() != null) {
-			SQL += " (order_date BETWEEN '" + dateFrom.getValue() + "'and '" + dateTo.getValue() + "') ";
+			SQL += " order_date BETWEEN '" + dateFrom.getValue() + "'and '" + dateTo.getValue() + "' ";
 			isDate = true;
 		}
 		
-		if (by_emp_search.getText() != "") {
-			if (isDate || isType) {
-				SQL += " and ";
-			}
+		
 
-			SQL += " emp_id =  " + Integer.parseInt(by_emp_search.getText());
-		}
-
-		SQL += " order by order_id; ";
+		SQL += " ORDER BY 'order_id'; ";
 		initialize();
 	}
 
@@ -136,7 +128,6 @@ public class allOrdersController {
 			by_emp_search.clear();
 			ordeID.clear();
 			
-
 		}
 		
 
@@ -152,7 +143,7 @@ public class allOrdersController {
 
 		orderId.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("order_id"));
 		date.setCellValueFactory(new PropertyValueFactory<invoiceData, String>("order_date"));
-		price.setCellValueFactory(new PropertyValueFactory<invoiceData, Double>("full_price"));
+		price.setCellValueFactory(new PropertyValueFactory<invoiceData, Double>("sale_price"));
 		byEmp.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("emp_id"));
 		getData();
 		TableData.setItems(dataList);
@@ -166,9 +157,9 @@ public class allOrdersController {
 			java.sql.Statement state = connector.a.connectDB().createStatement();
 			ResultSet rs = state.executeQuery(SQL);
 			while (rs.next()) {
-
-		invoiceData it = new invoiceData(rs.getInt(1),rs.getInt(2), rs.getDouble(3), rs.getInt(4),
-						rs.getInt(5), rs.getString(6),rs.getInt(7), rs.getString(8));
+System.out.println("kkkkk" + rs.getInt(2));
+		invoiceData it = new invoiceData(rs.getInt(1),rs.getInt(2), rs.getDouble(5),rs.getDouble(6),
+				(rs.getDouble(6)-rs.getDouble(5)), rs.getInt(3),rs.getInt(7), rs.getString(8),rs.getInt(9), rs.getString(10));
 
 				dataList.add(it);
 
@@ -244,7 +235,7 @@ public class allOrdersController {
 				stage = (Stage) openOrder.getScene().getWindow();
 				stage.close();
 				root = FXMLLoader.load(getClass().getResource("Order.fxml"));
-				Scene scene = new Scene(root, 951, 781);
+				Scene scene = new Scene(root, 900, 700);
 				stage.setScene(scene);
 				stage.setTitle("Orders");
 				stage.show();
@@ -265,7 +256,7 @@ public class allOrdersController {
 			try { // open new stage
 				FXMLLoader fxmlLoader = new FXMLLoader();
 				fxmlLoader.setLocation(getClass().getResource("staticsOrder.fxml"));
-				scene = new Scene(fxmlLoader.load(), 918, 463);
+				scene = new Scene(fxmlLoader.load(), 600, 463);
 				stage = new Stage();
 				stage.setTitle("statics Orders");
 				stage.setScene(scene);

@@ -41,6 +41,7 @@ public class orderesController {
 	public static String cusName = "";
 	public static int orderId;
 	private double priceToShow = 0;
+	private double originalPrice = 0;
 	String toFile = "";
 	private ArrayList<invoiceData> data;
 	private ObservableList<invoiceData> dataList;
@@ -78,6 +79,9 @@ public class orderesController {
 
     @FXML
     private TableColumn<invoiceData, Integer> itemQuantity;
+    
+    @FXML
+    private TableColumn<invoiceData, String> itemSize;
 
     @FXML
     private TableColumn<invoiceData, Integer> itembyEmployee;
@@ -135,20 +139,16 @@ public class orderesController {
     @FXML
     void addNew(ActionEvent event) {
     	Scene scene;
-		Stage stage = null;
+		Stage stage = null ;
 		try { // open new stage
 			FXMLLoader fxmlLoader = new FXMLLoader();
-			fxmlLoader.setLocation(getClass().getResource("addItem2Order.fxml"));
+			fxmlLoader.setLocation(getClass().getResource("addItemTOrder.fxml"));
 			scene = new Scene(fxmlLoader.load(), 394, 598);
 			stage = new Stage();
 			stage.setTitle("add new item");
 			stage.setScene(scene);
 			stage.show();
-
-		} catch (IOException e1) {
-		}
-
-		stage.setOnHidden(new EventHandler<WindowEvent>() {
+			stage.setOnHidden(new EventHandler<WindowEvent>() {
 
 			@Override
 			public void handle(WindowEvent paramT) {
@@ -157,6 +157,11 @@ public class orderesController {
 
 			}
 		});
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		
     }
 
     @FXML
@@ -205,6 +210,8 @@ public class orderesController {
 
 	private void deleteRow(invoiceData row) {
 		priceToShow -= (row.getSale_price() * row.getQuantity());
+		originalPrice -= row.getOriginal_price() * row.getQuantity();
+
 
 		try {
 			connector.a.connectDB();
@@ -262,9 +269,9 @@ public class orderesController {
 				if (r2.getInt(3) > 0) {
 					Message.displayMassage(
 							"There is not enough quantity of this product!\r\n" + "There is only: " + r2.getInt(3),
-							"warning");
+							"error");
 				} else {
-					Message.displayMassage("out of stock !", "warning");
+					Message.displayMassage("out of stock !", "error");
 
 				}
 			}
@@ -298,7 +305,7 @@ public class orderesController {
 		}
 
 		sqlDate = new java.sql.Date(myDate.getTime());
-		String type = "";
+		
 		try {
 
 			connector.a.connectDB();
@@ -320,12 +327,13 @@ public class orderesController {
 		if (!allOrdersController.isOpen) {
 			try {
 				connector.a.connectDB();
-				String sql = "insert into invoice(order_id,order_date,sale_price,emp_id) value(?,?,?,?);";
+				String sql = "insert into invoice(order_id,order_date,sale_price,profits,emp_id) value(?,?,?,?,?);";
 				PreparedStatement ps = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
 				ps.setInt(1, orderId);
-				ps.setTimestamp(8, new java.sql.Timestamp(myDate.getTime()));
+				ps.setTimestamp(2, new java.sql.Timestamp(myDate.getTime()));
 				ps.setDouble(3, priceToShow);
-				ps.setInt(6, sign_inController.empId);
+				ps.setDouble(4, (priceToShow - originalPrice));
+				ps.setInt(5, sign_inController.empId);
 				ps.execute();
 				connector.a.connectDB().close();
 
@@ -341,7 +349,7 @@ public class orderesController {
 //				System.out.println("okkk");
 				connector.a.connectDB();
 				connector.a.ExecuteStatement(
-						"update invoice set sale_price = " + priceToShow + ", emp_id = " + sign_inController.empId 
+						"update invoice set sale_price = " + priceToShow + ", profits = " + (priceToShow - originalPrice) 
 						+ " where order_id = " + orderId + " ;");
 				connector.a.connectDB().close();
 
@@ -433,7 +441,7 @@ public class orderesController {
 				PreparedStatement st2;
 				try {
 					connector.a.connectDB();
-					String sql = "insert into orders(order_id) value(?);";
+					String sql = "insert into orders(emp_id) value(?);";
 					PreparedStatement ps = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
 					ps.setInt(1, sign_inController.empId);
 					ps.execute();
@@ -459,9 +467,8 @@ public class orderesController {
 		TableData.setEditable(true);
 		counter.setSortable(false);
 		counter.setCellValueFactory(column -> new ReadOnlyObjectWrapper<Integer>(TableData.getItems().indexOf(column.getValue()) + 1));
-		itemParcode.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("item_id"));
-		
-		itemName.setCellValueFactory(new PropertyValueFactory<invoiceData, String>("itemName"));
+		itemParcode.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("item_id"));		
+		itemName.setCellValueFactory(new PropertyValueFactory<invoiceData, String>("item_name"));
 		itemQuantity.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("quantity"));
 		itemQuantity.setCellFactory(TextFieldTableCell.<invoiceData, Integer>forTableColumn(new IntegerStringConverter()));
 		itemQuantity.setOnEditStart((CellEditEvent<invoiceData, Integer> t) -> {
@@ -472,8 +479,10 @@ public class orderesController {
 
 			updateQuantity(t.getRowValue().getItem_id(), t.getRowValue().getOrder_id(), t.getNewValue(), old);
 		});
-		itemCategory.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("itemCat"));
-		itemPrice.setCellValueFactory(new PropertyValueFactory<invoiceData, Double>("full_sale_price"));
+		itemSize.setCellValueFactory(new PropertyValueFactory<invoiceData, String>("size"));
+
+		itemCategory.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("cat_id"));
+		itemPrice.setCellValueFactory(new PropertyValueFactory<invoiceData, Double>("sale_price"));
 
 		itembyEmployee.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("emp_id"));
 		getData();
@@ -486,6 +495,7 @@ public class orderesController {
 
 	public void getData() {
 		priceToShow = 0;
+		originalPrice = 0;
 		String SQL, od;
 		if (allOrdersController.isOpen) {
 			SQL = "select * from invoice where order_id=" + allOrdersController.ordId + ";";
@@ -506,9 +516,12 @@ public class orderesController {
 			toFile += "Date : " + dtf.format(now) + "\n";
 			toFile += "by Employee : " + sign_inController.empId + "\n";
 			toFile += "================= Products ================" + "\n";
-			toFile += "# | Item Name   | Quantity | Price " + "\n";
+			toFile += "# | Item Name  | Size  | Quantity | Price " + "\n";
+
+
 			while (rs.next()) {
-				String SQL2 = "select * from item where item_id=" + rs.getInt(1) + ";";
+			
+				String SQL2 = "select * from items where item_id=" + rs.getInt(3) + ";";
 				java.sql.Statement state2 = connector.a.connectDB().createStatement();
 				ResultSet rs2 = state2.executeQuery(SQL2);
 
@@ -517,12 +530,13 @@ public class orderesController {
 					ResultSet rs3 = state3.executeQuery(od);
 					if (rs3.next()) {
 
-					invoiceData it = new invoiceData(orderId, rs.getInt(1),rs.getDouble(2),rs.getInt(3), rs2.getInt(7), rs2.getString(2), rs3.getInt(2), rs3.getString(3));
+					invoiceData it = new invoiceData(orderId, rs.getInt(2),rs.getDouble(4),rs.getDouble(5),(rs.getDouble(4)-rs.getDouble(5)),rs.getInt(1), rs2.getInt(8), rs2.getString(2), rs3.getInt(2), rs3.getString(3));
 						dataList.add(it);
-						toFile += counter + "| " + rs2.getString(1) + " | " + rs.getInt(1) + " | "
-								+ (rs.getInt(1) * rs.getDouble(2)) + "\n";
+						toFile += counter + " |  " + rs2.getString(2) + " |   " +rs2.getString(7) + "   |    " + 
+						rs.getInt(4) + "     | " + (rs.getInt(4) * rs.getDouble(6)) + "\n";
 						toFile += "-------------------------------------------" + "\n";
-						priceToShow += (rs.getDouble(2) * rs.getInt(1));
+						priceToShow += (rs.getDouble(6) * rs.getInt(4));
+						originalPrice += rs.getDouble(5) * rs.getInt(4);
 					}
 				}
 				counter++;

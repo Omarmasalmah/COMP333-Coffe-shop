@@ -17,13 +17,12 @@
    <center>
       <AnchorPane prefHeight="630.0" prefWidth="706.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="TableData" layoutX="32.0" layoutY="103.0" prefHeight="322.0" prefWidth="641.0">
+            <TableView fx:id="TableData" layoutX="32.0" layoutY="103.0" prefHeight="322.0" prefWidth="594.0">
               <columns>
                 <TableColumn fx:id="orderId" prefWidth="137.59998321533203" text="Order ID" />
                 <TableColumn fx:id="date" prefWidth="173.5999755859375" text="Date" />
-                  <TableColumn fx:id="byEmp" prefWidth="111.20001220703125" text="by Employee" />
-                  <TableColumn fx:id="price" prefWidth="115.19992065429688" text="Price" />
-                  <TableColumn fx:id="bill_type" prefWidth="102.40004882812502" text="Type" />
+                  <TableColumn fx:id="byEmp" prefWidth="159.0" text="by Employee" />
+                  <TableColumn fx:id="price" prefWidth="125.0" text="Price" />
               </columns>
             </TableView>
             <ImageView fitHeight="69.0" fitWidth="69.0" layoutX="301.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">

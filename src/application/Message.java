@@ -26,9 +26,9 @@ public class Message {
 					new Image("‪file:///C:/Users/coolnet/Desktop/Java/DataBaseProject/src/application/error.png"));
 			window.setTitle(type);
 		} else if (type.equalsIgnoreCase("ok")) {
-			window.getIcons().add(new Image("file:\\Users\\Eyab\\Desktop\\Project_Pharmacy\\pharmacy\\correct.png"));
+			window.getIcons().add(new Image("file:///C:/Users/coolnet/Desktop/Java/DataBaseProject/src/application/ok.png"));
 			 imgWarning = new ImageView(
-					new Image("file:\\Users\\Eyab\\Desktop\\Project_Pharmacy\\pharmacy\\correct.png"));
+					new Image("file:///C:/Users/coolnet/Desktop/Java/DataBaseProject/src/application/ok.png"));
 			window.setTitle(type);
 		} else {
 			window.getIcons().add(new Image("file:///C:/Users/coolnet/Desktop/Java/DataBaseProject/src/application/error.png"));

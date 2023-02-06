@@ -96,10 +96,7 @@ public class categoryController {
     @FXML
     private Button search;
     
-    @FXML
-    void SearchOnAction(ActionEvent event) {
-
-    }
+   
 
     @FXML
     void addOnAction(ActionEvent event) {

@@ -22,6 +22,8 @@ CREATE TABLE orders (
     order_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     order_date DATE,
     emp_id INT,
+     customer_id INT,
+	FOREIGN KEY (customer_id) REFERENCES customers (customer_id) ON DELETE CASCADE ON UPDATE CASCADE,
      FOREIGN KEY (emp_id) REFERENCES employee (emp_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE categores (
@@ -113,8 +115,8 @@ CREATE TABLE invoice (
 );
 
 insert into employee (employee_name,birthday,emp_phone,date_of_employment,emp_password) value ("Khalid",'2000-08-2','0592501178','2020-03-15',"admin");
-insert into caegores (cat_id,categores_name) value (203,"مشروبات");
-insert into items (item_id,item_name,sale_price,origen_price,size,cat_id) value (1,"ice coffe",4,5,'M',203);
+insert into categores (cat_id,categores_name) value (203,"مشروبات");
+insert into items (item_id,item_name,sale_price,origen_price,quantity,size,cat_id) value (1,"ice coffe",4,5,300,'M',203);
  
  show tables; 
       select * from customer_feedback;

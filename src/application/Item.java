@@ -3,7 +3,7 @@ package application;
 
 public class Item {
 	
-	private int item_id;
+	private Integer item_id;
 	private String item_name;
 	private int quantity;
 	private String discription;

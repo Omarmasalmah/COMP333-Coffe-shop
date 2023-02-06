@@ -3,6 +3,8 @@ package application;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -89,13 +91,9 @@ System.out.println("ooooo"+ item_size.getValue());
 				System.out.println("nnnnnnnn "+ Item_name.getText());
 
 			}
-			System.out.println("qqqqqqqqqqq");
-
 			r2 = st2.executeQuery();
-			System.out.println("zzzzzzzzzzzzz");
 
 			if (r2.next()) {
-				System.out.println("lllllllllllllllllll");
 				System.out.println("name >>" + r2.getString(2));
 				System.out.println("id >>" + r2.getInt(1));
 				System.out.println("quant >>" + r2.getInt(5));
@@ -113,22 +111,40 @@ System.out.println("ooooo"+ item_size.getValue());
 
 		try {
 			if (r2.getInt(5) - item_quant.getValue() >= 0) {
+		    	
+				DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+				java.util.Date myDate = null;
+				@SuppressWarnings("unused")
+				java.sql.Date sqlDate;
 				try {
-					
+					myDate = formatter.parse(dtf.format(now));
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				sqlDate = new java.sql.Date(myDate.getTime());
+
+				try {
+
 //					System.out.println(r2.getDate(9).toString());
 //					System.out.println(dtf.format(now).toString());
 					connector.a.connectDB();
-					String sql = "insert into invoice(quantity ,sale_price ,original_price ,item_id,order_id) values (?,?,?,?,?);";
+					String sql = "insert into invoice(quantity ,sale_price ,original_price ,item_id,order_id,profits,order_date) values (?,?,?,?,?,?,?);";
 					PreparedStatement ps = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
 					connector.a.ExecuteStatement("update items set quantity = " + (r2.getInt(5) - item_quant.getValue())
 							+ " where item_id = " + r2.getInt(1)
 							+ " and cat_id = " + r2.getInt(8) + ";");
 
 					ps.setInt(1, item_quant.getValue());
-					ps.setDouble(2, r2.getDouble(3));
-					ps.setDouble(3, r2.getDouble(4));
+					ps.setDouble(2, r2.getDouble(4));
+					ps.setDouble(3, r2.getDouble(3));
+					ps.setDouble(6, (item_quant.getValue()*r2.getDouble(4))-(item_quant.getValue()*r2.getDouble(3)));
 					ps.setInt(4, r2.getInt(1));
 					ps.setInt(5, orderesController.orderId);
+					ps.setTimestamp(7, new java.sql.Timestamp(myDate.getTime()));
 					ps.execute();
 
 				} catch (SQLException e) {

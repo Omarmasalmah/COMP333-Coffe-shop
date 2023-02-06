@@ -28,6 +28,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
@@ -63,7 +64,11 @@ public class orderesController {
 
     @FXML
     private Button deleteItem;
-
+    
+    @FXML
+    private Button addc;
+    @FXML
+    private TextField cusName1;
 
     @FXML
     private TableColumn<invoiceData, Integer> itemCategory;
@@ -88,6 +93,9 @@ public class orderesController {
 
     @FXML
     private Label orderID;
+    
+    @FXML
+    private TextField cusphone;
 
     @FXML
     private Label price;
@@ -135,11 +143,72 @@ public class orderesController {
 
 		}
 	}
+    
+    @FXML
+    void addCust(ActionEvent event) {
+    	Customer cs;
+    	try {
+    		cs = new Customer(cusName1.getText(), cusphone.getText());
+    		Customer.cust=cs;
+    		insertData(cs);
+    		initialize();
+    		cusName1.clear();
+    		cusphone.clear();
+    		
+    		}
+    		catch (Exception e) {
+    		     Message.displayMassage("Wrong input!! Please check the input again", "error");   
+    		}
+
+    }
+    
+	private void insertData(Customer cs) {
+		
+		PreparedStatement st1,st2;
+		try {
+		connector.a.connectDB();
+		String sql = "Insert into customers (customer_name,phone) values(?,?)";
+		PreparedStatement ps = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
+		ps.setString(1, cs.getCustomer_name());
+		ps.setString(2, cs.getPhone());
+		ps.execute();
+		
+		
+
+		
+		st1 = connector.a.connectDB().prepareStatement("select MAX(customer_id) from customers;");
+		ResultSet r2 = st1.executeQuery();
+		if (r2.next()) {
+			cusId = r2.getInt(1);
+			
+			String sql1 = "insert into orders(customer_id) value(?);";
+			PreparedStatement ps1 = (PreparedStatement) connector.a.connectDB().prepareStatement(sql1);
+			ps1.setInt(1, cusId);
+			ps1.execute();
+			
+			st2 = connector.a.connectDB().prepareStatement("select customer_name from customers where customer_id =" +cusId +";");
+			ResultSet r3 = st2.executeQuery();
+			if (r3.next()) {
+			cusName = r3.getString(1);
+			}
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		//initialize();
+		
+		
+	//	String SQL = "select customer_id from customers where customer_name='" + cs.getCustomer_name()
+	//	+ "' and phone='" + cs.getPhone() + "';";
+	}
 
     @FXML
     void addNew(ActionEvent event) {
     	Scene scene;
 		Stage stage = null ;
+		
 		try { // open new stage
 			FXMLLoader fxmlLoader = new FXMLLoader();
 			fxmlLoader.setLocation(getClass().getResource("addItemTOrder.fxml"));
@@ -171,6 +240,7 @@ public class orderesController {
 				connector.a.connectDB();
 				connector.a.ExecuteStatement("delete from  invoice where order_id =" + orderId + ";");
 				connector.a.ExecuteStatement("delete from  orders where order_id =" + orderId + ";");
+				connector.a.ExecuteStatement("delete from  customers where customer_id =" + cusId + ";");
 				connector.a.connectDB().close();
 			} else {
 				allOrdersController.isOpen = false;
@@ -220,7 +290,7 @@ public class orderesController {
 			connector.a.ExecuteStatement("delete from invoice where  order_id=" + row.getOrder_id() + " and item_id="
 					+ row.getItem_id() + ";");
 			PreparedStatement st2 = connector.a.connectDB()
-					.prepareStatement("select * from item where item_id=" + row.getItem_id() + ";");
+					.prepareStatement("select * from items where item_id=" + row.getItem_id() + ";");
 			ResultSet r2 = st2.executeQuery();
 			if (r2.next()) {
 //				System.out.println("name >>" + r2.getString(1));
@@ -230,7 +300,7 @@ public class orderesController {
 //				System.out.println("orginal price >>" + r2.getDouble(6));
 
 			}
-			connector.a.ExecuteStatement("update item set quantity = " + (r2.getInt(3) + row.getQuantity())
+			connector.a.ExecuteStatement("update items set quantity = " + (r2.getInt(3) + row.getQuantity())
 					+ " where item_id = " + r2.getInt(2) + "' and cat_id = " + r2.getInt(7) + ";");
 
 			connector.a.connectDB().close();
@@ -307,12 +377,29 @@ public class orderesController {
 		sqlDate = new java.sql.Date(myDate.getTime());
 		
 		try {
+			connector.a.connectDB();
+			String sql = "insert into customers(customer_name) value(?);";
+			PreparedStatement cst = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
+			System.out.println(cusName);
+			cst.setString(1, cusName);
+			cst.execute();
+			connector.a.connectDB().close();
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
 
 			connector.a.connectDB();
-			String sql = "insert into orders(order_id,order_date) value(?,?);";
+			String sql = "insert into orders(order_date) value(?);";
 			PreparedStatement ps = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
-			ps.setInt(1, orderId);
-			ps.setTimestamp(2, new java.sql.Timestamp(myDate.getTime()));
+		//	ps.setInt(1, orderId);
+			ps.setTimestamp(1, new java.sql.Timestamp(myDate.getTime()));
 			ps.execute();
 			connector.a.connectDB().close();
 
@@ -361,13 +448,20 @@ public class orderesController {
 				e.printStackTrace();
 			}
 		}
+		
+		if (!cusName.equals("")) {
 		toFile += "============================================" + "\n";
 		toFile += "Total Amount :=> " + priceToShow + " $" + "\n";
 		toFile += "____________________________________________" + "\n";
 		toFile += "customer info. >>" + "\n";
 		toFile += "Name : " + cusName + "\n";
 		toFile += "ID : " + cusId + "\n";
-		
+		} else {
+			toFile += "============================================" + "\n";
+			toFile += "Total Amount :=> " + priceToShow + " $" + "\n";
+			toFile += "____________________________________________" + "\n";
+			
+		}
 		String fileName = "Order_" + orderId + ".txt";
 		
 		try {
@@ -435,20 +529,67 @@ public class orderesController {
     
     @FXML
 	public void initialize() {
+    	
+    	DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+		java.util.Date myDate = null;
+		@SuppressWarnings("unused")
+		java.sql.Date sqlDate;
+		try {
+			myDate = formatter.parse(dtf.format(now));
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		sqlDate = new java.sql.Date(myDate.getTime());
 
 		if (!allOrdersController.isOpen) {
 			if (!isCreatOrder) {
 				PreparedStatement st2;
 				try {
+					if (!cusName.equals("")) {
 					connector.a.connectDB();
-					String sql = "insert into orders(emp_id) value(?);";
+					String sql = "insert into orders(emp_id,customer_id,order_date) value(?,?,?);";
 					PreparedStatement ps = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
 					ps.setInt(1, sign_inController.empId);
+					ps.setInt(2, cusId);
+					ps.setTimestamp(3, new java.sql.Timestamp(myDate.getTime()));
+
 					ps.execute();
+					} else {
+						connector.a.connectDB();
+						String sql = "insert into orders(emp_id,order_date) value(?,?);";
+						PreparedStatement ps = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
+						ps.setInt(1, sign_inController.empId);
+						ps.setTimestamp(2, new java.sql.Timestamp(myDate.getTime()));
+
+						ps.execute();
+						
+					}
+					
+					
+					
+		//			String sql2 = "insert into customer_order(customer_id,order_id) value(?,?);";
+		//			PreparedStatement ps1 = (PreparedStatement) connector.a.connectDB().prepareStatement(sql2);
+		//			ps1.setInt(1, cusId);
+		//			ps1.setInt(2, orderId);
+		//		    ps1.execute();
+					
+		//			String csql = "insert into customers(customer_name) value(?);";
+
+		//			PreparedStatement cus = (PreparedStatement) connector.a.connectDB().prepareStatement(csql);
+
+				//	System.out.println("qqqqqqqqqqqqqqqqqqqq"+ cusName);
+				//	cus.setString(1, cusName1.getText());
+			//		cus.execute();
+					
 					st2 = connector.a.connectDB().prepareStatement("select MAX(order_id) from orders;");
 					ResultSet r2 = st2.executeQuery();
 					if (r2.next()) {
 						orderId = r2.getInt(1);
+					
 					}
 				} catch (ClassNotFoundException | SQLException e) {
 					e.printStackTrace();
@@ -467,8 +608,9 @@ public class orderesController {
 		TableData.setEditable(true);
 		counter.setSortable(false);
 		counter.setCellValueFactory(column -> new ReadOnlyObjectWrapper<Integer>(TableData.getItems().indexOf(column.getValue()) + 1));
+	
 		itemParcode.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("item_id"));		
-		itemName.setCellValueFactory(new PropertyValueFactory<invoiceData, String>("item_name"));
+		itemName.setCellValueFactory(new PropertyValueFactory<invoiceData, String>("itemName"));
 		itemQuantity.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("quantity"));
 		itemQuantity.setCellFactory(TextFieldTableCell.<invoiceData, Integer>forTableColumn(new IntegerStringConverter()));
 		itemQuantity.setOnEditStart((CellEditEvent<invoiceData, Integer> t) -> {
@@ -479,9 +621,9 @@ public class orderesController {
 
 			updateQuantity(t.getRowValue().getItem_id(), t.getRowValue().getOrder_id(), t.getNewValue(), old);
 		});
-		itemSize.setCellValueFactory(new PropertyValueFactory<invoiceData, String>("size"));
+		itemSize.setCellValueFactory(new PropertyValueFactory<invoiceData, String>("order_date"));
 
-		itemCategory.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("cat_id"));
+		itemCategory.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("itemCat"));
 		itemPrice.setCellValueFactory(new PropertyValueFactory<invoiceData, Double>("sale_price"));
 
 		itembyEmployee.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("emp_id"));
@@ -529,14 +671,19 @@ public class orderesController {
 					java.sql.Statement state3 = connector.a.connectDB().createStatement();
 					ResultSet rs3 = state3.executeQuery(od);
 					if (rs3.next()) {
+						System.out.println("orig "+rs.getDouble(6));
+						System.out.println("sale "+rs.getDouble(5));
+						System.out.println("emp "+rs3.getInt(3));
+						System.out.println("item name "+rs2.getString(2));
+						System.out.println("size  "+rs2.getString(7));
 
-					invoiceData it = new invoiceData(orderId, rs.getInt(2),rs.getDouble(4),rs.getDouble(5),(rs.getDouble(4)-rs.getDouble(5)),rs.getInt(1), rs2.getInt(8), rs2.getString(2), rs3.getInt(2), rs3.getString(3));
+					invoiceData it = new invoiceData(orderId, rs.getInt(4),rs.getDouble(5),rs.getDouble(6),(rs.getDouble(5) * rs.getInt(4)),rs2.getInt(1), rs2.getInt(8), rs2.getString(2), rs3.getInt(3), rs2.getString(7));
 						dataList.add(it);
 						toFile += counter + " |  " + rs2.getString(2) + " |   " +rs2.getString(7) + "   |    " + 
-						rs.getInt(4) + "     | " + (rs.getInt(4) * rs.getDouble(6)) + "\n";
+						rs.getInt(4) + "     | " + (rs.getInt(4) * rs.getDouble(5)) + "\n";
 						toFile += "-------------------------------------------" + "\n";
-						priceToShow += (rs.getDouble(6) * rs.getInt(4));
-						originalPrice += rs.getDouble(5) * rs.getInt(4);
+						priceToShow += (rs.getDouble(5) * rs.getInt(4));
+						originalPrice += rs.getDouble(4) * rs.getInt(4);
 					}
 				}
 				counter++;

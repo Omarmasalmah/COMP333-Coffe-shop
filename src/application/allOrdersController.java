@@ -112,7 +112,7 @@ public class allOrdersController {
 		
 		
 
-		SQL += " ORDER BY 'order_id'; ";
+		SQL += " ORDER BY order_id; ";
 		initialize();
 	}
 
@@ -143,7 +143,7 @@ public class allOrdersController {
 
 		orderId.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("order_id"));
 		date.setCellValueFactory(new PropertyValueFactory<invoiceData, String>("order_date"));
-		price.setCellValueFactory(new PropertyValueFactory<invoiceData, Double>("sale_price"));
+		price.setCellValueFactory(new PropertyValueFactory<invoiceData, Double>("profits"));
 		byEmp.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("emp_id"));
 		getData();
 		TableData.setItems(dataList);
@@ -151,15 +151,24 @@ public class allOrdersController {
 	}
 
 	public void getData() {
-
+		double prof;
 		try {
 			connector.a.connectDB();
 			java.sql.Statement state = connector.a.connectDB().createStatement();
 			ResultSet rs = state.executeQuery(SQL);
+			
 			while (rs.next()) {
-System.out.println("kkkkk" + rs.getInt(2));
+		//		prof=rs.getDouble(5)-rs.getDouble(6);
+				System.out.println("id" + rs.getInt(1));
+				System.out.println("qu " + rs.getInt(1));
+			//	System.out.println("pr " + prof);
+
+				System.out.println("sa" + rs.getDouble(5));
+				System.out.println("or" + rs.getDouble(6));
+				System.out.println("item " + rs.getInt(3));
+
 		invoiceData it = new invoiceData(rs.getInt(1),rs.getInt(2), rs.getDouble(5),rs.getDouble(6),
-				(rs.getDouble(6)-rs.getDouble(5)), rs.getInt(3),rs.getInt(7), rs.getString(8),rs.getInt(9), rs.getString(10));
+				rs.getDouble(5) * rs.getInt(2), rs.getInt(3),rs.getInt(7), rs.getString(8),rs.getInt(9), rs.getString(10));
 
 				dataList.add(it);
 

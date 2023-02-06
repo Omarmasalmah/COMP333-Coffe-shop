@@ -526,7 +526,6 @@ public class orderesController {
 		TableData.setItems(sortedData);
 	}
     
-    
     @FXML
 	public void initialize() {
     	
@@ -568,22 +567,6 @@ public class orderesController {
 						ps.execute();
 						
 					}
-					
-					
-					
-		//			String sql2 = "insert into customer_order(customer_id,order_id) value(?,?);";
-		//			PreparedStatement ps1 = (PreparedStatement) connector.a.connectDB().prepareStatement(sql2);
-		//			ps1.setInt(1, cusId);
-		//			ps1.setInt(2, orderId);
-		//		    ps1.execute();
-					
-		//			String csql = "insert into customers(customer_name) value(?);";
-
-		//			PreparedStatement cus = (PreparedStatement) connector.a.connectDB().prepareStatement(csql);
-
-				//	System.out.println("qqqqqqqqqqqqqqqqqqqq"+ cusName);
-				//	cus.setString(1, cusName1.getText());
-			//		cus.execute();
 					
 					st2 = connector.a.connectDB().prepareStatement("select MAX(order_id) from orders;");
 					ResultSet r2 = st2.executeQuery();

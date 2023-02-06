@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class sign_upController {
+	public static int empId;
 
     @FXML
     private Button button_Signup_in_signup;
@@ -55,8 +56,14 @@ public class sign_upController {
     @FXML
 	void signupOnAction(ActionEvent event) {
 		Employee rc;
+		PreparedStatement st2;
 		try {
-		rc = new Employee(txtName.getText(), datefield.getValue().toString(), Integer.parseInt(txtphone.getText()),
+			st2 = connector.a.connectDB().prepareStatement("select MAX(order_id) from orders;");
+			ResultSet r2 = st2.executeQuery();
+			if (r2.next()) {
+				empId = r2.getInt(1);
+			}
+		rc = new Employee(empId,txtName.getText(), datefield.getValue().toString(), Integer.parseInt(txtphone.getText()),
 				txtPassword.getText(), dateOFworkfield.getValue().toString(), Double.parseDouble(txtsalary.getText()));
 		Employee.emd=rc;
 		insertData(rc);

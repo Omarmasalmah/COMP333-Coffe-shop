@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="807.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.employeeController">
+<BorderPane prefHeight="807.0" prefWidth="900.0" styleClass="photo" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.employeeController">
    <left>
 		<AnchorPane prefHeight="780.0" prefWidth="1184.0" styleClass="photo" stylesheets="@application.css" BorderPane.alignment="CENTER">
 			<children>
@@ -121,15 +121,6 @@
             </ImageView>
             <TextField fx:id="AddPassword" layoutX="462.0" layoutY="633.0" prefHeight="31.0" prefWidth="161.0" promptText="Password" />
             <TextField fx:id="AddAmount" layoutX="629.0" layoutY="633.0" prefHeight="31.0" prefWidth="122.0" promptText="Amount" />
-            <Button fx:id="SearchBtn" layoutX="481.0" layoutY="10.0" mnemonicParsing="false" onAction="#SearchOnAction" prefHeight="34.0" prefWidth="87.0" style="-fx-background-radius: 50;" stylesheets="@application.css" text="     Search">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Button>
-            <ImageView fitHeight="29.0" fitWidth="25.0" layoutX="487.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../images/search.png" />
-               </image>
-            </ImageView>
             <DatePicker fx:id="updatedEmpDate" layoutX="662.0" layoutY="449.0" prefHeight="32.0" prefWidth="161.0" promptText="Employment date" />
             <DatePicker fx:id="AddEmpDate" layoutX="589.0" layoutY="595.0" prefHeight="32.0" prefWidth="162.0" promptText="Employment date" />
             <DatePicker fx:id="AddBirthdate" layoutX="426.0" layoutY="595.0" prefHeight="32.0" prefWidth="158.0" promptText="Birthdate" />

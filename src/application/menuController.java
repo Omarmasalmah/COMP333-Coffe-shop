@@ -78,7 +78,7 @@ public class menuController {
    			stage = (Stage) btEmp.getScene().getWindow();
    			stage.close();
    			root = FXMLLoader.load(getClass().getResource("Employee.fxml"));
-   			Scene scene = new Scene(root, 900, 807);
+   			Scene scene = new Scene(root, 950, 700);
    			stage.setScene(scene);
    			stage.setTitle("Employees");
    			stage.show();

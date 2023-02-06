@@ -11,6 +11,7 @@ public class Orders {
 	public Orders() {
 		super();
 	}
+	
 
 	public Orders(int order_id, int empId, String order_date) {
 		super();

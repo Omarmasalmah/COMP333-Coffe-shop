@@ -51,6 +51,82 @@ public class menuController {
 	}
     
     @FXML
+   	void Item(ActionEvent event) {
+   		try { // open new stage
+   			
+   			Stage stage;
+   			Parent root;
+   			stage = (Stage) btItem.getScene().getWindow();
+   			stage.close();
+   			root = FXMLLoader.load(getClass().getResource("Item.fxml"));
+   			Scene scene = new Scene(root, 1100, 700);
+   			stage.setScene(scene);
+   			stage.setTitle("Items");
+   			stage.show();
+
+   		} catch (IOException e1) {
+   		}
+   		
+   	}
+    
+    @FXML
+   	void Emp(ActionEvent event) {
+   		try { // open new stage
+   			
+   			Stage stage;
+   			Parent root;
+   			stage = (Stage) btEmp.getScene().getWindow();
+   			stage.close();
+   			root = FXMLLoader.load(getClass().getResource("Employee.fxml"));
+   			Scene scene = new Scene(root, 900, 807);
+   			stage.setScene(scene);
+   			stage.setTitle("Employees");
+   			stage.show();
+
+   		} catch (IOException e1) {
+   		}
+   		
+   	}
+    
+    @FXML
+   	void Cat(ActionEvent event) {
+   		try { // open new stage
+   			
+   			Stage stage;
+   			Parent root;
+   			stage = (Stage) btCat.getScene().getWindow();
+   			stage.close();
+   			root = FXMLLoader.load(getClass().getResource("Categores.fxml"));
+   			Scene scene = new Scene(root, 933, 643);
+   			stage.setScene(scene);
+   			stage.setTitle("Categores");
+   			stage.show();
+
+   		} catch (IOException e1) {
+   		}
+   		
+   	}
+    
+    @FXML
+   	void Feedback(ActionEvent event) {
+   		try { // open new stage
+   			
+   			Stage stage;
+   			Parent root;
+   			stage = (Stage) btFeed.getScene().getWindow();
+   			stage.close();
+   			root = FXMLLoader.load(getClass().getResource("Feedback.fxml"));
+   			Scene scene = new Scene(root, 869, 699);
+   			stage.setScene(scene);
+   			stage.setTitle("Feedback");
+   			stage.show();
+
+   		} catch (IOException e1) {
+   		}
+   		
+   	}
+    
+    @FXML
     void LogOut(ActionEvent event) {
 		try { // open new stage
 			Stage stage;

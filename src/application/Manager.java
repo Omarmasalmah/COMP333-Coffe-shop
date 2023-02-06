@@ -10,7 +10,7 @@ public class Manager {
 	
 	public Manager() {
 		super();
-		
+	
 	}
 	public String getName() {
 		return name;

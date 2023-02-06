@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="643.0" prefWidth="933.0" style="-fx-background-color: #63C5DA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.categoryController">
+   <top>
+		<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="906.0" styleClass="pic2" stylesheets="@application.css" BorderPane.alignment="CENTER">
+			<children>
+				<TableView fx:id="TableData" layoutX="122.0" layoutY="77.0" prefHeight="306.0" prefWidth="654.0">
+					<columns>
+						<TableColumn fx:id="id" prefWidth="209.5999755859375" text="Category ID" />
+						<TableColumn fx:id="name" minWidth="0.0" prefWidth="211.20001220703125" text="Name" />
+						<TableColumn fx:id="numberOfItem" prefWidth="232.0" text="Number Of Item" />
+					</columns>
+					<opaqueInsets>
+						<Insets />
+					</opaqueInsets>
+				</TableView>
+				<AnchorPane layoutX="175.0" layoutY="22.0" />
+				<Button fx:id="Update" layoutX="627.0" layoutY="446.0" mnemonicParsing="false" onAction="#updateOnAction" prefHeight="34.0" prefWidth="126.0" style="-fx-background-radius: 50; -fx-background-color: KHAKI;" styleClass="dark-blue" stylesheets="@application.css" text="   Update">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+				<Label layoutX="222.0" layoutY="398.0" prefHeight="34.0" prefWidth="132.0" text="Update Category: ">
+					<font>
+						<Font name="Bell MT Bold" size="16.0" />
+					</font>
+				</Label>
+				<TextField fx:id="oldID" layoutX="368.0" layoutY="400.0" prefHeight="31.0" prefWidth="163.0" promptText="Category ID" stylesheets="@application.css" />
+				<TextField fx:id="newID" layoutX="166.0" layoutY="448.0" prefHeight="31.0" prefWidth="147.0" promptText="New ID" stylesheets="@application.css" />
+				<TextField fx:id="newName" layoutX="324.0" layoutY="448.0" prefHeight="31.0" prefWidth="125.0" promptText="New Name" stylesheets="@application.css" />
+				<TextField fx:id="newNumber" layoutX="466.0" layoutY="448.0" onAction="#SearchOnAction" prefHeight="31.0" prefWidth="129.0" promptText="New Number" stylesheets="@application.css" />
+					<TextField fx:id="SearchFiled" layoutX="547.0" layoutY="18.0" prefHeight="34.0" prefWidth="160.0" promptText="Search by ID" style="-fx-text-fill: Black; -fx-border-color: blue;">
+               <font>
+                  <Font size="13.0" />
+               </font></TextField>
+				<TextField fx:id="CategoryIDdelete" layoutX="154.0" layoutY="615.0" prefHeight="37.0" prefWidth="192.0" promptText="Category ID" stylesheets="@application.css" />
+				<Button fx:id="Delete" layoutX="368.0" layoutY="616.0" mnemonicParsing="false" onAction="#deleteOnAction" prefHeight="34.0" prefWidth="98.0" style="-fx-background-color: KHAKI; -fx-background-radius: 50;" stylesheets="@application.css" text="       Delete">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+				<Line endX="755.0" layoutX="181.0" layoutY="490.0" startX="-174.99998474121094" />
+				<Label layoutX="14.0" layoutY="612.0" prefHeight="41.0" prefWidth="196.0" text="Delete Category:">
+					<font>
+						<Font name="Bell MT Bold" size="16.0" />
+					</font>
+				</Label>
+				<Line endX="750.0" layoutX="186.0" layoutY="568.0" startX="-185.99998474121094" />
+				<Button fx:id="add" layoutX="637.0" layoutY="505.0" mnemonicParsing="false" onAction="#addOnAction" prefHeight="33.0" prefWidth="106.0" style="-fx-background-radius: 50; -fx-background-color: KHAKI;" styleClass="KHAKI" stylesheets="@application.css" text="  Add ">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+				<Label layoutX="14.0" layoutY="384.0" prefHeight="44.0" prefWidth="217.0" text="Enter Any Field To Update:">
+               <font>
+                  <Font name="Bell MT Bold" size="14.0" />
+               </font></Label>
+            <Button fx:id="btnback" layoutX="771.0" layoutY="615.0" mnemonicParsing="false" onAction="#back" prefHeight="35.0" prefWidth="107.0" style="-fx-background-radius: 50; -fx-background-color: KHAKI;" stylesheets="@application.css" text="    Back" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Label layoutX="14.0" layoutY="503.0" prefHeight="40.0" prefWidth="160.0" text="Add New Category:">
+               <font>
+                  <Font name="Bell MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="catname" layoutX="162.0" layoutY="511.0" prefHeight="29.0" prefWidth="155.0" promptText="Category Name" />
+            <TextField fx:id="addCatid" layoutX="324.0" layoutY="511.0" prefHeight="30.0" prefWidth="130.0" promptText="Category ID" />
+            <TextField fx:id="NumOfitemsAdd" layoutX="465.0" layoutY="510.0" prefHeight="31.0" prefWidth="132.0" promptText="Number of items" />
+            <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="646.0" layoutY="509.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/addOrder.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="43.0" layoutX="778.0" layoutY="617.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/back.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="search" layoutX="735.0" layoutY="20.0" mnemonicParsing="false" onAction="#SearchOnAction" prefHeight="32.0" prefWidth="117.0" style="-fx-background-radius: 50; -fx-background-color: KHAKI;" stylesheets="@application.css" text="        Search">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="31.0" fitWidth="32.0" layoutX="374.0" layoutY="617.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="34.0" layoutX="634.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/refresh.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="743.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/search.png" />
+               </image></ImageView>
+
+			</children>
+		</AnchorPane>
+   </top>
+</BorderPane>

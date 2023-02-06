@@ -41,7 +41,7 @@ public class orderesController {
 	public static int cusId = 0;
 	public static String cusName = "";
 	public static int orderId;
-	private double priceToShow = 0;
+	public static double priceToShow = 0;
 	private double originalPrice = 0;
 	String toFile = "";
 	private ArrayList<invoiceData> data;
@@ -414,13 +414,13 @@ public class orderesController {
 		if (!allOrdersController.isOpen) {
 			try {
 				connector.a.connectDB();
-				String sql = "insert into invoice(order_id,order_date,sale_price,profits,emp_id) value(?,?,?,?,?);";
+				String sql = "insert into invoice(order_id,order_date,sale_price,profits) value(?,?,?,?);";
 				PreparedStatement ps = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
 				ps.setInt(1, orderId);
 				ps.setTimestamp(2, new java.sql.Timestamp(myDate.getTime()));
 				ps.setDouble(3, priceToShow);
 				ps.setDouble(4, (priceToShow - originalPrice));
-				ps.setInt(5, sign_inController.empId);
+			//	ps.setInt(5, sign_inController.empId);
 				ps.execute();
 				connector.a.connectDB().close();
 

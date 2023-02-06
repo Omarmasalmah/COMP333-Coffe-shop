@@ -9,7 +9,7 @@ public class Employee {
 	private int phone;
     private double amount_paid;
     
-    
+   
     static Employee emd;
     
 	public Employee() {

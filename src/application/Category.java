@@ -5,7 +5,7 @@ public class Category {
 	private int cat_id;
 	private String categores_name;
 	private int number_of_item;
-
+ 
 	public Category() {
 		super();
 	}

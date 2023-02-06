@@ -71,7 +71,6 @@
                   <Image url="@../../images/search.png" />
                </image>
             </ImageView>
-            <TextField fx:id="by_emp_search" layoutX="433.0" layoutY="452.0" prefHeight="31.0" prefWidth="89.0" promptText="by Employee" />
             <DatePicker fx:id="dateFrom" layoutX="31.0" layoutY="454.0" prefHeight="26.0" prefWidth="98.0" promptText=" from Date" />
             <DatePicker fx:id="dateTo" layoutX="137.0" layoutY="454.0" prefHeight="26.0" prefWidth="91.0" promptText="to Date" />
          </children>

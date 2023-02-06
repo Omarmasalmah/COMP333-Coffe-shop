@@ -81,19 +81,19 @@ CREATE TABLE order_item (
 
 CREATE TABLE feedback (
     customer_id INT,
-    feedback_id INT,
-    feedback_comment VARCHAR(255),
-	feedback_date DATE,
-    PRIMARY KEY (feedback_id,customer_id),
+    feedback_number INT auto_increment,
+    feedback_rating INT,
+
+    PRIMARY KEY (feedback_number,customer_id),
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
 
 CREATE TABLE customer_feedback (
     customer_id INT,
-    feedback_id INT,
-    PRIMARY KEY (customer_id, feedback_id),
+    feedback_number INT,
+    PRIMARY KEY (customer_id, feedback_number),
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
-    FOREIGN KEY (feedback_id) REFERENCES feedback(feedback_id)
+    FOREIGN KEY (feedback_number) REFERENCES feedback(feedback_number)
 );
 
 CREATE TABLE invoice (

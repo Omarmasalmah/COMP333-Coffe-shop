@@ -10,7 +10,6 @@ public class Customer {
 	public Customer() {
 		super();
 	}
-
 	
 	public Customer(String customer_name,  String phone) {
 		super();

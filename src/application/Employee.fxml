@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="807.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.employeeController">
+   <left>
+		<AnchorPane prefHeight="780.0" prefWidth="1184.0" styleClass="photo" stylesheets="@application.css" BorderPane.alignment="CENTER">
+			<children>
+				<TableView fx:id="TableData" layoutX="7.0" layoutY="54.0" prefHeight="336.0" prefWidth="1003.0">
+					<columns>
+						<TableColumn fx:id="item_nameColumn" prefWidth="100.0" text="Employee ID" />
+                  <TableColumn fx:id="discriptionColumn" prefWidth="232.0" text="Employee Name" />
+                  <TableColumn fx:id="sale_priceColumn" prefWidth="153.5999755859375" text="Birthdate" />
+                  <TableColumn fx:id="cat_idColumn" prefWidth="163.199951171875" text="phone number" />
+                  <TableColumn prefWidth="133.60009765625" text="Employment date" />
+                  <TableColumn prefWidth="111.199951171875" text="password" />
+                  <TableColumn prefWidth="107.9999877929688" text="amount" />
+					</columns>
+					<opaqueInsets>
+						<Insets />
+					</opaqueInsets>
+				</TableView>
+				<Button fx:id="UpdateBtn" layoutX="897.0" layoutY="487.0" mnemonicParsing="false" onAction="#updateOnAction" prefHeight="32.0" prefWidth="99.0" style="-fx-background-radius: 50;" stylesheets="@application.css" text="        Update">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+				<Label layoutX="8.0" layoutY="396.0" prefHeight="21.0" prefWidth="175.0" style="-fx-background-color: white;" text="Update employee's data " textFill="#463c3c">
+					<font>
+						<Font name="Bell MT Bold" size="16.0" />
+					</font>
+				</Label>
+				<TextField fx:id="oldempID" layoutX="401.0" layoutY="407.0" prefHeight="34.0" prefWidth="158.0" promptText="Employee ID" />
+				<TextField fx:id="updatedPhone" layoutX="403.0" layoutY="488.0" prefHeight="30.0" prefWidth="153.0" promptText="New phone number" />
+				<TextField fx:id="updatedPassword" layoutX="831.0" layoutY="449.0" prefHeight="31.0" prefWidth="161.0" promptText="New password" />
+				<TextField fx:id="updatedAmount" layoutX="729.0" layoutY="487.0" prefHeight="31.0" prefWidth="125.0" promptText="New Amount" />
+				<Label layoutX="11.0" layoutY="13.0" prefHeight="18.0" prefWidth="189.0" style="-fx-underline: true; -fx-background-color: white;" styleClass="text" stylesheets="@application.css" text="Search For an employee :">
+					<font>
+						<Font name="Arial Bold" size="15.0" />
+					</font>
+				</Label>
+				<TextField fx:id="SearchFiled" layoutX="208.0" layoutY="12.0" prefHeight="31.0" prefWidth="245.0" promptText="Search ID" style="-fx-background-radius: 50;" />
+				<Button fx:id="DeleteBtn" layoutX="389.0" layoutY="537.0" mnemonicParsing="false" onAction="#deleteOnAction" prefHeight="34.0" prefWidth="94.0" style="-fx-background-radius: 50;" stylesheets="@application.css" text="     Delete">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+				<Line endX="824.4000244140625" layoutX="186.0" layoutY="524.0" startX="-186.0" startY="-7.0" stroke="#333131" />
+				<Label layoutX="10.0" layoutY="537.0" prefHeight="22.0" prefWidth="150.0" style="-fx-background-color: white;" text="Delete Employee" textFill="#1b1818">
+					<font>
+						<Font name="Arial Bold" size="18.0" />
+					</font>
+				</Label>
+				<Label layoutX="10.0" layoutY="597.0" prefHeight="26.0" prefWidth="235.0" style="-fx-background-color: white;" text="Add a new employee">
+					<font>
+						<Font name="Arial Bold" size="21.0" />
+					</font>
+				</Label>
+				<Button fx:id="addBtn" layoutX="804.0" layoutY="612.0" mnemonicParsing="false" onAction="#addOnAction" prefHeight="42.0" prefWidth="101.0" style="-fx-background-radius: 50;" stylesheets="@application.css" text="      Add">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+				<Label layoutX="196.0" layoutY="454.0" prefHeight="22.0" prefWidth="157.0" style="-fx-background-color: white;" text="Enter the new values: " textFill="#282525">
+               <font>
+                  <Font name="Bell MT" size="16.0" />
+               </font></Label>
+            <Line endX="670.0" endY="-63.0" layoutX="432.0" layoutY="593.0" startX="-336.9928283691406" startY="-63.0" stroke="#333131" />
+            <TextField fx:id="addName" layoutX="282.0" layoutY="595.0" prefHeight="31.0" prefWidth="140.0" promptText="Name" />
+            <TextField fx:id="Addphone" layoutX="283.0" layoutY="633.0" prefHeight="31.0" prefWidth="172.0" promptText="Phone number" />
+            <Button fx:id="BackButton" layoutX="1113.0" layoutY="619.0" mnemonicParsing="false" onAction="#backOnAction" prefHeight="42.0" prefWidth="99.0" style="-fx-background-radius: 50;" stylesheets="@application.css" text="        Back" textAlignment="CENTER">
+               <font>
+                  <Font size="13.0" />
+               </font></Button>
+            <TextField fx:id="DeleteEmpId" layoutX="173.0" layoutY="533.0" prefHeight="34.0" prefWidth="184.0" promptText="Employee ID" />
+            <Button fx:id="RefreshBtn" layoutX="1113.0" layoutY="546.0" mnemonicParsing="false" onAction="#refreshOnAction" prefHeight="42.0" prefWidth="98.0" style="-fx-background-radius: 50;" stylesheets="@application.css" text="         Refresh" textFill="#534a4a">
+               <font>
+                  <Font size="13.0" />
+               </font></Button>
+            <Line endX="647.199951171875" endY="-65.20709228515625" layoutX="360.0" layoutY="460.0" startX="-355.699951171875" startY="-65.20709228515625" stroke="#333131" />
+            <Line endX="-100.0" endY="27.39996337890625" layoutX="1237.0" layoutY="661.0" startX="-100.0" />
+            <Label layoutX="196.0" layoutY="413.0" prefHeight="22.0" prefWidth="193.0" style="-fx-background-color: white;" text="Enter the employee's data: " textFill="#282525">
+               <font>
+                  <Font name="Bell MT" size="16.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="35.0" fitWidth="33.0" layoutX="1128.0" layoutY="624.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/back.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="1125.0" layoutY="553.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/refresh.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="401.0" layoutY="543.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="27.0" layoutX="820.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/addOrder.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="27.0" layoutX="912.0" layoutY="490.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/refresh.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="AddPassword" layoutX="462.0" layoutY="633.0" prefHeight="31.0" prefWidth="161.0" promptText="Password" />
+            <TextField fx:id="AddAmount" layoutX="629.0" layoutY="633.0" prefHeight="31.0" prefWidth="122.0" promptText="Amount" />
+            <Button fx:id="SearchBtn" layoutX="481.0" layoutY="10.0" mnemonicParsing="false" onAction="#SearchOnAction" prefHeight="34.0" prefWidth="87.0" style="-fx-background-radius: 50;" stylesheets="@application.css" text="     Search">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <ImageView fitHeight="29.0" fitWidth="25.0" layoutX="487.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/search.png" />
+               </image>
+            </ImageView>
+            <DatePicker fx:id="updatedEmpDate" layoutX="662.0" layoutY="449.0" prefHeight="32.0" prefWidth="161.0" promptText="Employment date" />
+            <DatePicker fx:id="AddEmpDate" layoutX="589.0" layoutY="595.0" prefHeight="32.0" prefWidth="162.0" promptText="Employment date" />
+            <DatePicker fx:id="AddBirthdate" layoutX="426.0" layoutY="595.0" prefHeight="32.0" prefWidth="158.0" promptText="Birthdate" />
+            <TextField fx:id="updatedID" layoutX="402.0" layoutY="449.0" prefHeight="31.0" prefWidth="114.0" promptText="New ID" />
+            <DatePicker fx:id="updatedBirthDate1" layoutX="563.0" layoutY="487.0" prefHeight="32.0" prefWidth="161.0" promptText="Birthdate" />
+            <TextField fx:id="updatedName" layoutX="522.0" layoutY="449.0" prefHeight="31.0" prefWidth="134.0" promptText="New Name" />
+            <Button fx:id="FindAvg" layoutX="1024.0" layoutY="141.0" mnemonicParsing="false" onAction="#FindAvgOnAction" prefHeight="26.0" prefWidth="116.0" style="-fx-background-radius: 50;" text="Find Average" />
+            <TextArea fx:id="avgArea" layoutX="1023.0" layoutY="90.0" prefHeight="44.0" prefWidth="118.0" promptText="Average Amount For Emplyees" />
+            <Line endX="30.4000244140625" endY="7.62939453125E-6" layoutX="1117.0" layoutY="81.0" startX="-100.0" />
+            <Line endX="30.4000244140625" endY="7.62939453125E-6" layoutX="1116.0" layoutY="181.0" startX="-100.0" />
+            <TextArea fx:id="MaxArea" layoutX="1018.0" layoutY="189.0" prefHeight="101.0" prefWidth="126.0" promptText="Maximum Amount and the employee" />
+            <Button fx:id="FindMax1" layoutX="1022.0" layoutY="295.0" mnemonicParsing="false" onAction="#FindMaxOnAction" prefHeight="26.0" prefWidth="116.0" style="-fx-background-radius: 50;" text="Find Max Amount" />
+            <Line endX="30.4000244140625" endY="7.62939453125E-6" layoutX="1115.0" layoutY="331.0" startX="-100.0" />
+
+			</children>
+		</AnchorPane>
+   </left>
+</BorderPane>

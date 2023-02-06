@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class staticsProfitsController {
+	
 
     @FXML
     private Label Profits;

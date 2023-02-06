@@ -11,7 +11,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-
 public class connector {
 	private static String dbUsername = "root";
 	private static String dbPassword = "4848";

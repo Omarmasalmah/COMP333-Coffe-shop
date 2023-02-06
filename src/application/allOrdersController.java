@@ -37,6 +37,7 @@ import javafx.util.converter.IntegerStringConverter;
 
 public class allOrdersController {
 
+
 	public static boolean isOpen = false;
 	public static int ordId;
 
@@ -93,7 +94,6 @@ public class allOrdersController {
 	void search(ActionEvent event) {
 		isSearch = true;
 		boolean isDate = false;
-		boolean isType = false;
 		if (dateFrom.getValue() == (null) && !(dateTo.getValue() == (null))
 				|| !(dateFrom.getValue() == (null)) && dateTo.getValue() == (null)) {
 			Message.displayMassage("please put 'date from' and 'date to' together", "error");
@@ -101,16 +101,14 @@ public class allOrdersController {
 		}
 		SQL = "select * from invoice ";
 
-		if (dateFrom.getValue() != null || by_emp_search.getText() != "") {
-			SQL += " where ";
+		if (dateFrom.getValue() != null ) {
+			SQL += "where ";
 		}
 
 		if (dateFrom.getValue() != null) {
-			SQL += " order_date BETWEEN '" + dateFrom.getValue() + "'and '" + dateTo.getValue() + "' ";
+			SQL += " order_date >= '" + dateFrom.getValue() + "'and '" + dateTo.getValue() + "'; ";
 			isDate = true;
 		}
-		
-		
 
 		SQL += " ORDER BY order_id; ";
 		initialize();
@@ -125,21 +123,21 @@ public class allOrdersController {
 			TableData.setEditable(true);
 			dateFrom.setValue(null);
 			dateTo.setValue(null);
-			by_emp_search.clear();
+		//	by_emp_search.clear();
 			ordeID.clear();
 			
 		}
 		
 
 		isSearch = false;
-		by_emp_search.textProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if (!newValue.matches("\\d*")) {
-					by_emp_search.setText(newValue.replaceAll("[^\\d]", ""));
-				}
-			}
-		});
+	//	by_emp_search.textProperty().addListener(new ChangeListener<String>() {
+	//		@Override
+	//		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+	//			if (!newValue.matches("\\d*")) {
+	//				by_emp_search.setText(newValue.replaceAll("[^\\d]", ""));
+	//			}
+	//		}
+	//	});
 
 		orderId.setCellValueFactory(new PropertyValueFactory<invoiceData, Integer>("order_id"));
 		date.setCellValueFactory(new PropertyValueFactory<invoiceData, String>("order_date"));
@@ -152,27 +150,44 @@ public class allOrdersController {
 
 	public void getData() {
 		double prof;
+		
+		String od;
+		
+	//	sql = "select * from invoice where order_id=" + ordId + ";";
+		od = "select * from orders ;";
 		try {
 			connector.a.connectDB();
 			java.sql.Statement state = connector.a.connectDB().createStatement();
 			ResultSet rs = state.executeQuery(SQL);
 			
+			
+			
 			while (rs.next()) {
+				String SQL2 = "select * from items where item_id=" + rs.getInt(3) + ";";
+				java.sql.Statement state2 = connector.a.connectDB().createStatement();
+				ResultSet rs2 = state2.executeQuery(SQL2);
+				if (rs2.next()) {
+					
+					java.sql.Statement state3 = connector.a.connectDB().createStatement();
+					ResultSet rs3 = state3.executeQuery(od);
+					if (rs3.next()) {
 		//		prof=rs.getDouble(5)-rs.getDouble(6);
-				System.out.println("id" + rs.getInt(1));
-				System.out.println("qu " + rs.getInt(1));
+				System.out.println("id" + rs2.getInt(1));
+				System.out.println("qu " + rs.getInt(4));
 			//	System.out.println("pr " + prof);
 
 				System.out.println("sa" + rs.getDouble(5));
 				System.out.println("or" + rs.getDouble(6));
-				System.out.println("item " + rs.getInt(3));
+				System.out.println("cat " + rs2.getInt(8));
 
-		invoiceData it = new invoiceData(rs.getInt(1),rs.getInt(2), rs.getDouble(5),rs.getDouble(6),
-				rs.getDouble(5) * rs.getInt(2), rs.getInt(3),rs.getInt(7), rs.getString(8),rs.getInt(9), rs.getString(10));
+		invoiceData it = new invoiceData(rs.getInt(1),rs.getInt(4), rs.getDouble(5),rs.getDouble(6),
+				rs.getDouble(5) * rs.getInt(4), rs2.getInt(1),rs2.getInt(8), rs2.getString(2), rs3.getInt(3), rs.getString(2));
 
 				dataList.add(it);
 
 			}
+		}
+		}
 			rs.close();
 			state.close();
 			connector.a.connectDB().close();
@@ -194,7 +209,7 @@ public class allOrdersController {
 			stage = (Stage) btnback.getScene().getWindow();
 			stage.close();
 			root = FXMLLoader.load(getClass().getResource("chooseOrders.fxml"));
-			Scene scene = new Scene(root, 901, 649);
+			Scene scene = new Scene(root, 369, 474);
 			stage.setScene(scene);
 			stage.setTitle("Choose order");
 			stage.show();
@@ -244,7 +259,7 @@ public class allOrdersController {
 				stage = (Stage) openOrder.getScene().getWindow();
 				stage.close();
 				root = FXMLLoader.load(getClass().getResource("Order.fxml"));
-				Scene scene = new Scene(root, 900, 700);
+				Scene scene = new Scene(root, 980, 700);
 				stage.setScene(scene);
 				stage.setTitle("Orders");
 				stage.show();

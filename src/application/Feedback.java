@@ -3,58 +3,44 @@ package application;
 
 public class Feedback {
 	
-	private int feedback_id;
-	private String feedback_comment;
+	private int feedback_Number;
+	private int feedback_Rating;
 	private int customer_id;
-	private String feedback_date;
 	
 	
 	public Feedback() {
 		super();
 	}
 
-	
+	static Feedback feed;
 
-	public Feedback(int feedback_id, int customer_id, String feedback_comment, String feedback_date) {
+	public Feedback( int customer_id,int feedback_Number, int feedback_Rating) {
 		super();
-		this.feedback_id = feedback_id;
+		this.feedback_Number = feedback_Number;
 		this.customer_id = customer_id;
-		this.feedback_comment = feedback_comment;
-		this.feedback_date = feedback_date;
+		this.feedback_Rating = feedback_Rating;
 		
 	}
 
-
-
-	public int getFeedback_id() {
-		return feedback_id;
+	public int getFeedback_Number() {
+		return feedback_Number;
 	}
 
-
-
-	public void setFeedback_id(int feedback_id) {
-		this.feedback_id = feedback_id;
+	public void setFeedback_Number(int feedback_Number) {
+		this.feedback_Number = feedback_Number;
 	}
 
-
-
-	public String getFeedback_comment() {
-		return feedback_comment;
+	public int getFeedback_Rating() {
+		return feedback_Rating;
 	}
 
-
-
-	public void setFeedback_comment(String feedback_comment) {
-		this.feedback_comment = feedback_comment;
+	public void setFeedback_Rating(int feedback_Rating) {
+		this.feedback_Rating = feedback_Rating;
 	}
-
-
 
 	public int getCustomer_id() {
 		return customer_id;
 	}
-
-
 
 	public void setCustomer_id(int customer_id) {
 		this.customer_id = customer_id;
@@ -62,20 +48,6 @@ public class Feedback {
 
 
 
-	public String getFeedback_date() {
-		return feedback_date;
-	}
 
-
-
-	public void setFeedback_date(String feedback_date) {
-		this.feedback_date = feedback_date;
-	}
-
-
-	
-
-
-	
 
 }

@@ -18,7 +18,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 		
-			HBox root = FXMLLoader.load(getClass().getResource("Sign_in.fxml"));
+        	HBox root = FXMLLoader.load(getClass().getResource("Sign_in.fxml"));
 			primaryStage.setTitle("Sinjel Cafe");
 			Scene scene = new Scene(root,600,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

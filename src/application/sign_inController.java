@@ -64,7 +64,8 @@ public class sign_inController {
 			}
 			if (txtPassword.getText().isEmpty()) {
 				Message.displayMassage("Please enter the txtPassword","error");
-				return;
+
+return;
 			}
 //			else {
 			if (r1.next()) {

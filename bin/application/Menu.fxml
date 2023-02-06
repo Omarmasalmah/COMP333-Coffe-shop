@@ -20,7 +20,7 @@
             <Font name="System Italic" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="btItem" layoutX="312.0" layoutY="50.0" mnemonicParsing="false" prefHeight="118.0" prefWidth="188.0" stylesheets="@application.css" />
+      <Button fx:id="btItem" layoutX="312.0" layoutY="50.0" mnemonicParsing="false" onAction="#Item" prefHeight="118.0" prefWidth="188.0" stylesheets="@application.css" />
       <ImageView fitHeight="61.0" fitWidth="61.0" layoutX="374.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
          <image>
             <Image url="@../../images/item.png" />
@@ -31,7 +31,7 @@
             <Font name="System Italic" size="22.0" />
          </font>
       </Label>
-      <Button fx:id="btCat" layoutX="309.0" layoutY="182.0" mnemonicParsing="false" prefHeight="118.0" prefWidth="188.0" stylesheets="@application.css" />
+      <Button fx:id="btCat" layoutX="309.0" layoutY="182.0" mnemonicParsing="false" onAction="#Cat" prefHeight="118.0" prefWidth="188.0" stylesheets="@application.css" />
       <ImageView fitHeight="56.0" fitWidth="53.0" layoutX="371.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
          <image>
             <Image url="@../../images/catagories.png" />
@@ -42,7 +42,7 @@
             <Font name="System Italic" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="btFeed" layoutX="194.0" layoutY="325.0" mnemonicParsing="false" prefHeight="118.0" prefWidth="188.0" stylesheets="@application.css" />
+      <Button fx:id="btFeed" layoutX="194.0" layoutY="325.0" mnemonicParsing="false" onAction="#Feedback" prefHeight="118.0" prefWidth="188.0" stylesheets="@application.css" />
       <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="253.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
          <image>
             <Image url="@../../images/feedback.png" />
@@ -53,7 +53,7 @@
             <Font name="System Italic" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="btEmp" layoutX="75.0" layoutY="182.0" mnemonicParsing="false" prefHeight="118.0" prefWidth="188.0" stylesheets="@application.css" />
+      <Button fx:id="btEmp" layoutX="75.0" layoutY="182.0" mnemonicParsing="false" onAction="#Emp" prefHeight="118.0" prefWidth="188.0" stylesheets="@application.css" />
       <ImageView fitHeight="61.0" fitWidth="61.0" layoutX="136.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
          <image>
             <Image url="@../../images/employee.png" />

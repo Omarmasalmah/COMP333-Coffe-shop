@@ -15,7 +15,8 @@ public class invoiceData {
 
 	public invoiceData() {
 		super();
-	}
+	
+}
 
 	public invoiceData(int order_id, int quantity, double sale_price,double original_price, double profits, int item_id, int itemCat, String itemName, int emp_id, String order_date) {
 		super();

@@ -32,7 +32,6 @@ public class FeedBackController {
 	 private ArrayList<Feedback> data;
 		private ObservableList<Feedback> dataList;
 
-
     @FXML
     private ResourceBundle resources;
 
@@ -175,7 +174,7 @@ public class FeedBackController {
     	
     }
 
-   
+ 
     @FXML
     public void initialize() {
 	

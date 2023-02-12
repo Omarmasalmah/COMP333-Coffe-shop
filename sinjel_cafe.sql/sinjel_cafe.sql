@@ -20,7 +20,11 @@ CREATE TABLE employee (
 
 CREATE TABLE orders (
     order_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    order_date DATE
+    order_date DATE,
+    emp_id INT,
+     customer_id INT,
+	FOREIGN KEY (customer_id) REFERENCES customers (customer_id) ON DELETE CASCADE ON UPDATE CASCADE,
+     FOREIGN KEY (emp_id) REFERENCES employee (emp_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE categores (
     cat_id INT PRIMARY KEY NOT NULL,

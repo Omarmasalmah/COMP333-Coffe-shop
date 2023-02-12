@@ -11,7 +11,7 @@
  *  Feddback 
  
 <details align="center">
-<summary><b> Random ScreenShots ✔⭐</b></summary>
+<summary><b> Random ScreenShots 📸⭐</b></summary>
 <table>
   <thead>
  </p>

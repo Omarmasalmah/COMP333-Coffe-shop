@@ -6,8 +6,8 @@
  
  *  Orders
  *  Items
- *  Categories
  *  Employees
+ *  Categories
  *  Feedback 
  
 <details align="center">

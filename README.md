@@ -10,8 +10,7 @@
  *  Employees
  *  Feddback 
  
- ![]( https://github.com/MohamadAlwan/COMP333_Project_Pharmacy/blob/main/Pharmacy_Final_Vresion/pharmacy/first.png)
- 
+![plot](C:\Users\coolnet\Desktop\Java\DataBaseProject\images\basic3.jpg) 
  
 
 ***

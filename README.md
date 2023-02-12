@@ -8,7 +8,7 @@
  *  Items
  *  Categories
  *  Employees
- *  Feddback 
+ *  Feedback 
  
 <details align="center">
 <summary><b> Random ScreenShots 📸⭐</b></summary>

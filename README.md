@@ -16,10 +16,12 @@
   <thead>
  </p>
  
-![basic3](https://user-images.githubusercontent.com/112338255/218337705-473423b2-6221-4030-87d6-0fb3a0481db0.jpg)
+ ![لقطة شاشة_١٤٤٤٠٦٢٩_٠٩١٥٥٤](https://user-images.githubusercontent.com/112338255/218337793-f6bfeaaf-cdc3-4522-b677-4ed99805c25f.png)
 
 
- 
+
+ ![لقطة شاشة_١٤٤٤٠٧١١_٠١٠٩٤٦](https://user-images.githubusercontent.com/112338255/218337808-95939608-5a61-4add-8e14-6fb89d3a6ce0.png)
+
 <br />
 </table>
 </details>

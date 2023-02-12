@@ -2,7 +2,7 @@
 
  <H2 align="center" > <strong>Sinjel Cafe System </strong> </H2>
  
- ![](C:\Users\coolnet\Desktop\Java\DataBaseProject\images\basic.jpg)
+ ![]([C:\Users\coolnet\Desktop\Java\DataBaseProject\images\basic.jpg](https://github.com/Omarmasalmah/COMP333-Coffe-shop/blob/master/images/basic.jpg))
  
  *  Orders
  *  Items

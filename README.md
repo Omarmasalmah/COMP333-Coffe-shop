@@ -22,7 +22,7 @@
 
 ## Student’s names and IDs:
 
-* Omar Masalmah   - 1200060  (https://github.com/Omarmasalmah) 
+* [Omar Masalmah](https://github.com/Omarmasalmah)   - 1200060  
 * Mahmoud Hamdan  - 1201134  &emsp; (@mahmoudbzu)
 * Yazeed Hamdan    - 1201133  &emsp; (@YazeedHamdan1201133)
  

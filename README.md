@@ -12,19 +12,18 @@
  
 <details align="center">
 <summary><b> Random ScreenShots ✔⭐</b></summary>
-<table>
-  <thead>
- </p>
+
  
 
+
+
 ***
-
-
-## Student’s names and IDs:
+ 
+## Student’s Names and IDs:
 
 * [Omar Masalmah](https://github.com/Omarmasalmah)   - 1200060  
-* Mahmoud Hamdan  - 1201134  &emsp; (@mahmoudbzu)
-* Yazeed Hamdan    - 1201133  &emsp; (@YazeedHamdan1201133)
+* [Mahmoud Hamdan]https://github.com/mahmoudbzu  - 1201134  
+* [Yazeed Hamdan]https://github.com/YazeedHamdan1201133    - 1201133  
  
 
 

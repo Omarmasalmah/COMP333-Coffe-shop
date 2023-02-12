@@ -31,10 +31,7 @@
 </table>
 </details>
 
-## Languages And Tools:
 
--<img align="left" alt=  "Java" width="50px" src="https://logoeps.com/wp-content/uploads/2011/06/java-logo-vector.png" /> <img align="left" alt="Scene Builder" width="50px" src="https://i2.wp.com/gluonhq.com/wp-content/uploads/2015/02/SceneBuilderLogo.png?fit=781%2C781&ssl=1" /><img align="left" alt="GitHub" width="50px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" /> 
-<br/>
 
 
 
@@ -42,8 +39,8 @@
 ## Student’s Names and IDs:
 
 * [Omar Masalmah](https://github.com/Omarmasalmah)   - 1200060  
-* [Mahmoud Hamdan]https://github.com/mahmoudbzu  - 1201134  
-* [Yazeed Hamdan]https://github.com/YazeedHamdan1201133    - 1201133  
+* [Mahmoud Hamdan](https://github.com/mahmoudbzu)  - 1201134  
+* [Yazeed Hamdan](https://github.com/YazeedHamdan1201133)    - 1201133  
  
 
 

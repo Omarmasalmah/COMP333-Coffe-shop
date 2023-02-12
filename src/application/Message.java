@@ -36,6 +36,7 @@ public class Message {
 					new Image("file:///C:/Users/coolnet/Desktop/Java/DataBaseProject/src/application/error.png"));
 			window.setTitle(type);
 		}
+		
 
 		// Style for buttons
 		String styleBt = "-fx-background-color: #ffffff;"

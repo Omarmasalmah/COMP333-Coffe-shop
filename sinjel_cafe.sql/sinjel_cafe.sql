@@ -1,6 +1,6 @@
-drop database Sinjel_Cafe;
-create database Sinjel_Cafe;
-use Sinjel_Cafe;
+drop database sinjel_cafe;
+create database sinjel_cafe;
+use sinjel_cafe;
 
 CREATE TABLE customers (
     customer_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -20,11 +20,7 @@ CREATE TABLE employee (
 
 CREATE TABLE orders (
     order_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    order_date DATE,
-    emp_id INT,
-     customer_id INT,
-	FOREIGN KEY (customer_id) REFERENCES customers (customer_id) ON DELETE CASCADE ON UPDATE CASCADE,
-     FOREIGN KEY (emp_id) REFERENCES employee (emp_id) ON DELETE CASCADE ON UPDATE CASCADE
+    order_date DATE
 );
 CREATE TABLE categores (
     cat_id INT PRIMARY KEY NOT NULL,
@@ -33,14 +29,15 @@ CREATE TABLE categores (
 );
 
 CREATE TABLE items (
-    item_id INT PRIMARY KEY NOT NULL,
+    item_id INT,
     item_name VARCHAR(30),
 	sale_price REAL,
     origen_price REAL,
     quantity INT,
     discription VARCHAR(70),
     size VARCHAR(2),
-	cat_id INT,
+     cat_id INT,
+     PRIMARY KEY (item_id),
     FOREIGN KEY (cat_id) REFERENCES categores(cat_id)
     
     );
@@ -115,9 +112,11 @@ CREATE TABLE invoice (
 );
 
 insert into employee (employee_name,birthday,emp_phone,date_of_employment,emp_password) value ("Khalid",'2000-08-2','0592501178','2020-03-15',"admin");
-insert into categores (cat_id,categores_name) value (203,"مشروبات");
-insert into items (item_id,item_name,sale_price,origen_price,quantity,size,cat_id) value (1,"ice coffe",4,5,300,'M',203);
- 
+insert into customers(customer_id,customer_name,phone) value (3,"yazeed",'09548799879');
+insert into employee (employee_name,birthday,emp_phone,date_of_employment,emp_password,amount_paid) value ("mahmoud",'2020-08-2','0592501166','2021-03-15',"123456",22.5);
+
+
+
  show tables; 
       select * from customer_feedback;
       select * from customer_order;
@@ -131,4 +130,4 @@ insert into items (item_id,item_name,sale_price,origen_price,quantity,size,cat_i
       select * from orders;
 	  select * from order_item;
 	  select * from invoice;
-
+      select avg(feedback_rating) from feedback;

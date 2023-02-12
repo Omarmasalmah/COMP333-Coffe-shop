@@ -36,21 +36,21 @@ import javafx.scene.control.TableColumn;
 
 public class employeeController {
 	@FXML
-	private TableView <Employee> TableData;
+	private TableView <employee> TableData;
 	@FXML
-    private TableColumn<Employee, Date> BirthdateColumn;
+    private TableColumn<employee, Date> BirthdateColumn;
 	 @FXML
-	 private TableColumn<Employee, Date> EmpDateColumn;
+	 private TableColumn<employee, Date> EmpDateColumn;
 	 @FXML
-	  private TableColumn<Employee, String> PhoneColumn;
+	  private TableColumn<employee, String> PhoneColumn;
 	 @FXML
-	  private TableColumn<Employee, Double> amountColumn;
+	  private TableColumn<employee, Double> amountColumn;
 	 @FXML
-	    private TableColumn<Employee, Integer> empIDcloumn;
+	    private TableColumn<employee, Integer> empIDcloumn;
 	  @FXML
-	    private TableColumn<Employee, String> empNameColumn;
+	    private TableColumn<employee, String> empNameColumn;
 	  @FXML
-	    private TableColumn<Employee, String> passwordColumn;
+	    private TableColumn<employee, String> passwordColumn;
 	@FXML
 	private Button UpdateBtn;
 	@FXML
@@ -104,11 +104,10 @@ public class employeeController {
 	 @FXML 
 	 private Button FindMax1;
 	 
-	 private ArrayList<Employee> data;
-	private ObservableList<Employee> dataList;
+	 private ArrayList<employee> data;
+	private ObservableList<employee> dataList;
 	 
 	 
-
 	// Event Listener on Button[#UpdateBtn].onAction
 	@FXML
 	public void updateOnAction(ActionEvent event) {
@@ -163,7 +162,10 @@ public class employeeController {
 		catch (Exception e) {
 			showDialog("ERROR","Wrong input!"," check your input again",AlertType.ERROR);
 		}
-	
+		
+		
+		
+		
 	}
 	// Event Listener on Button[#DeleteBtn].onAction
 	@FXML
@@ -178,14 +180,19 @@ public class employeeController {
 				DeleteEmpId.clear();
 				initialize();
 			}
-		
+			
+			
 		}
 	 catch (Exception e) {
 		 DeleteEmpId.clear();
 		 showDialog("ERROR","Wrong input!"," check your input again",AlertType.ERROR);
 	 }
+		
+		
+		
+		
+		
 	}
-	
 	// Event Listener on Button[#addBtn].onAction
 	@FXML
 	public void addOnAction(ActionEvent event) {
@@ -193,6 +200,8 @@ public class employeeController {
 		
 		
 		try {
+			
+			
 			
 			connector.a.connectDB();
 			String sql = "insert into employee(employee_name,birthday,emp_phone,date_of_employment,emp_password,amount_paid) value (?,?,?,?,?,?)";
@@ -203,6 +212,10 @@ public class employeeController {
 			ps.setString(4, AddEmpDate.getValue().toString());
 			ps.setString(5, AddPassword.getText());
 			ps.setDouble(6, Double.parseDouble(AddAmount.getText()));
+			
+			
+			
+			
 			ps.execute();
 			
 			addName.clear();
@@ -212,13 +225,19 @@ public class employeeController {
 			AddEmpDate.setValue(null);
 			AddBirthdate.setValue(null);
 			initialize();
+				
 			
 		}
+		
 		
 		catch (Exception e) {
 			showDialog("", "Wrong input!!", "Please check the input again", AlertType.ERROR);
 		}
-	
+		
+		
+		
+		
+		
 		
 	}
 	// Event Listener on Button[#BackButton].onAction
@@ -401,16 +420,16 @@ public class employeeController {
 			dataList = FXCollections.observableArrayList(data);
 			TableData.setEditable(true);
 			
-	/*		BirthdateColumn.setCellValueFactory(new PropertyValueFactory<Employee,Date>("birthday"));
-			EmpDateColumn.setCellValueFactory(new PropertyValueFactory<Employee,Date>("date_of_employment"));
-			PhoneColumn.setCellValueFactory(new PropertyValueFactory<Employee,String>("emp_phone"));
+			BirthdateColumn.setCellValueFactory(new PropertyValueFactory<employee,Date>("birthday"));
+			EmpDateColumn.setCellValueFactory(new PropertyValueFactory<employee,Date>("date_of_employment"));
+			PhoneColumn.setCellValueFactory(new PropertyValueFactory<employee,String>("emp_phone"));
 			
-			amountColumn.setCellValueFactory(new PropertyValueFactory<Employee,Double>("amount_paid"));
-			empIDcloumn.setCellValueFactory(new PropertyValueFactory<Employee,Integer>("emp_id"));
+			amountColumn.setCellValueFactory(new PropertyValueFactory<employee,Double>("amount_paid"));
+			empIDcloumn.setCellValueFactory(new PropertyValueFactory<employee,Integer>("emp_id"));
 			
-			empNameColumn.setCellValueFactory(new PropertyValueFactory<Employee,String>("employee_name"));
-			passwordColumn.setCellValueFactory(new PropertyValueFactory<Employee,String>("emp_password"));
-			*/
+			empNameColumn.setCellValueFactory(new PropertyValueFactory<employee,String>("employee_name"));
+			passwordColumn.setCellValueFactory(new PropertyValueFactory<employee,String>("emp_password"));
+			
 			try {
 				getData();
 				}
@@ -429,8 +448,8 @@ public class employeeController {
 			 java.sql.Statement statement2 = connector.a.connectDB().createStatement();
 			ResultSet ResSet = statement2.executeQuery(sql);
 			 while (ResSet.next()) {
-				 Employee i = new Employee(ResSet.getInt(1),ResSet.getString(2),ResSet.getString(3),
-						 ResSet.getInt(4),ResSet.getString(5),
+				 employee i = new employee(ResSet.getInt(1),ResSet.getString(2),ResSet.getString(3),
+						 ResSet.getString(4),ResSet.getString(5),
 						 ResSet.getString(6),ResSet.getDouble(7));
 			       dataList.add(i);
 			 }
@@ -450,7 +469,7 @@ public class employeeController {
 	 
 	 
 	 private void searchEmp() {
-			FilteredList<Employee> filteredData = new FilteredList<>(dataList, b -> true);
+			FilteredList<employee> filteredData = new FilteredList<>(dataList, b -> true);
 			SearchFiled.textProperty().addListener((observable, oldValue, newValue) -> {
 				filteredData.setPredicate(employee -> {
 					if (newValue == null || newValue.isEmpty()) {
@@ -458,7 +477,7 @@ public class employeeController {
 					}
 					String lowerCaseFilter = newValue.toLowerCase();
 
-					if (String.valueOf(employee.getId()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					if (String.valueOf(employee.getEmp_id()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
 						return true; 
 					} else if (employee.getEmployee_name().toLowerCase().indexOf(lowerCaseFilter) != -1) {
 						return true; 
@@ -467,7 +486,7 @@ public class employeeController {
 						return false; 
 				});
 			});
-			SortedList<Employee> sortedData = new SortedList<>(filteredData);
+			SortedList<employee> sortedData = new SortedList<>(filteredData);
 			sortedData.comparatorProperty().bind(TableData.comparatorProperty());
 			TableData.setItems(sortedData);
 		}

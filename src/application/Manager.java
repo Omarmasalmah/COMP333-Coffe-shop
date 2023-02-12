@@ -12,6 +12,7 @@ public class Manager {
 		super();
 	
 	}
+	
 	public String getName() {
 		return name;
 	}

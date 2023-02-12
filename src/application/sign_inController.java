@@ -38,7 +38,6 @@ public class sign_inController {
     @FXML
     private PasswordField txtPassword;
     
-   
     
     @FXML
 	void btnSign_in(ActionEvent event) {
@@ -54,8 +53,10 @@ public class sign_inController {
 //				showDialog("error", "you entered a wrong data", null, AlertType.ERROR);
 //
 //			} 
+			System.out.println("enters");
 
 			if (txtName.getText().isEmpty()) {
+				System.out.println("nnnnnnnnnnnnnnnnn");
 
 				Message.displayMassage("Please enter the user name","error");
 				return;

@@ -449,6 +449,7 @@ public class orderesController {
 			}
 		}
 		
+		
 		if (!cusName.equals("")) {
 		toFile += "============================================" + "\n";
 		toFile += "Total Amount :=> " + priceToShow + " $" + "\n";
@@ -684,5 +685,3 @@ public class orderesController {
 		}
 	}
 }
-
-

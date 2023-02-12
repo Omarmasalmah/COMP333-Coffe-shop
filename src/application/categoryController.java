@@ -96,7 +96,10 @@ public class categoryController {
     @FXML
     private Button search;
     
-   
+    @FXML
+    void SearchOnAction(ActionEvent event) {
+
+    }
 
     @FXML
     void addOnAction(ActionEvent event) {
@@ -127,6 +130,7 @@ public class categoryController {
 		stage.setScene(scene);
 		//stage.setTitle("Choose order");
 		stage.show();
+
     }
 
     @FXML

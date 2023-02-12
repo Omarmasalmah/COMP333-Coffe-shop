@@ -18,7 +18,6 @@ public class Customer {
 	
 	}
 
-
 	
 
 	public int getId() {

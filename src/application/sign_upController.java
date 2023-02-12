@@ -55,7 +55,7 @@ public class sign_upController {
     
     @FXML
 	void signupOnAction(ActionEvent event) {
-		Employee rc;
+		employee rc;
 		PreparedStatement st2;
 		try {
 			st2 = connector.a.connectDB().prepareStatement("select MAX(order_id) from orders;");
@@ -63,9 +63,9 @@ public class sign_upController {
 			if (r2.next()) {
 				empId = r2.getInt(1);
 			}
-		rc = new Employee(empId,txtName.getText(), datefield.getValue().toString(), Integer.parseInt(txtphone.getText()),
+		rc = new employee(empId,txtName.getText(), datefield.getValue().toString(), txtphone.getText(),
 				txtPassword.getText(), dateOFworkfield.getValue().toString(), Double.parseDouble(txtsalary.getText()));
-		Employee.emd=rc;
+		employee.emd=rc;
 		insertData(rc);
 		txtName.clear();
 		txtPassword.clear();
@@ -87,7 +87,8 @@ public class sign_upController {
 		alert.show();
 
 	}
-	private void insertData(Employee rc) {
+	
+	private void insertData(employee rc) {
 
 		try {
 			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -121,7 +122,7 @@ public class sign_upController {
 			PreparedStatement ps = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
 			ps.setString(4, rc.getEmp_password());
 			ps.setString(1, rc.getEmployee_name());
-			ps.setInt(3, rc.getPhone());
+			ps.setString(3, rc.getEmp_phone());
 			ps.setDouble(6, rc.getAmount_paid());
 			ps.setTimestamp(2, new java.sql.Timestamp(myDate.getTime()));
 			ps.setTimestamp(5, new java.sql.Timestamp(myDate2.getTime()));
@@ -214,5 +215,3 @@ public class sign_upController {
 
 
 }
-
-

@@ -26,7 +26,6 @@ public class chooseOrderController {
     @FXML
 	public void initialize() {
 
-
 	}
     
     

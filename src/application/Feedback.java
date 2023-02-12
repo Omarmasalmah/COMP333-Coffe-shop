@@ -7,7 +7,6 @@ public class Feedback {
 	private int feedback_Rating;
 	private int customer_id;
 	
-	
 	public Feedback() {
 		super();
 	}

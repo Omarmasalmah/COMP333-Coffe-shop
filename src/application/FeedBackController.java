@@ -29,8 +29,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class FeedBackController {
-	
-	public static int feedId;
 	 private ArrayList<Feedback> data;
 		private ObservableList<Feedback> dataList;
 
@@ -119,21 +117,16 @@ public class FeedBackController {
     }
 
     @FXML
-    void backOnAction(ActionEvent event) {
-    	try { // open new stage
-			Stage stage;
-			Parent root;
-			stage = (Stage) back.getScene().getWindow();
-			stage.close();
-			root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-			Scene scene = new Scene(root, 901, 649);
-			stage.setScene(scene);
-			stage.setTitle("Sinjel Cafe");
-			stage.show();
-
-		} catch (IOException e1) {
-
-		}
+    void backOnAction(ActionEvent event) throws IOException {
+    	Stage stage;
+		Parent root;
+		stage = (Stage) back.getScene().getWindow();
+		stage.close();
+		root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+		Scene scene = new Scene(root, 901, 649);
+		stage.setScene(scene);
+		//stage.setTitle("Choose order");
+		stage.show();
 
     }
     @FXML
@@ -207,14 +200,14 @@ public class FeedBackController {
 
     
 
-    @FXML
-    public void initialize() {
+@FXML
+public void initialize() {
 	data = new ArrayList<>();
 	dataList = FXCollections.observableArrayList(data);
 	table.setEditable(true);
-	//custid.setCellValueFactory(new PropertyValueFactory<Feedback,Integer>("customer_id"));
-	//fedNum.setCellValueFactory(new PropertyValueFactory<Feedback,Integer>("feedback_Number"));
-	//ratingg.setCellValueFactory(new PropertyValueFactory<Feedback,Integer>("feedback_Rating"));
+	custid.setCellValueFactory(new PropertyValueFactory<Feedback,Integer>("customer_id"));
+	fedNum.setCellValueFactory(new PropertyValueFactory<Feedback,Integer>("feedback_Number"));
+	ratingg.setCellValueFactory(new PropertyValueFactory<Feedback,Integer>("feedback_Rating"));
 	try {
 		getData();
 	}
@@ -226,27 +219,15 @@ public class FeedBackController {
 
 }
 
-    private void getData() {
-	PreparedStatement st2;
-	try {
-	st2 = connector.a.connectDB().prepareStatement("select MAX(feedback_number) from feedback;");
-	ResultSet r2 = st2.executeQuery();
-	if (r2.next()) {
-		feedId = r2.getInt(1);
-	}
-	} catch (ClassNotFoundException | SQLException e) {
-		e.printStackTrace();
-	}
-	
-	
-	
+private void getData() {
 	String SQL = "select * from feedback";
 	try {
 		connector.a.connectDB();
 		java.sql.Statement state = connector.a.connectDB().createStatement();
 		ResultSet rs = state.executeQuery(SQL);
 		while (rs.next()) {
-			Feedback feed = new Feedback(feedId,rs.getInt(2),rs.getInt(3));
+			Feedback feed = new Feedback(rs.getInt(1),
+					rs.getInt(2),rs.getInt(3));
 			dataList.add(feed);
 		}
 		rs.close();
@@ -262,7 +243,45 @@ public class FeedBackController {
 
 }
 
-   
+            
+    /*
+    private void insertData(Feedback rc) {
+
+ 		try {
+ 		
+               //rc = new Feedback(feednum.getText(), cusid.getText(),rating.getText() );
+ 			connector.a.connectDB();
+ 			String sql = "Insert into feedback (customer_id,feedback_rating) values(?,?)";
+ 			PreparedStatement ps = (PreparedStatement) connector.a.connectDB().prepareStatement(sql);
+ 			ps.setInt(1, rc.getCustomer_id());
+ 		//	ps.setInt(2,rc.getFeedback_Number());
+ 			if(star1.isSelected()) {
+ 			ps.setInt(3, 1);
+ 			}
+ 			else if (star2.isSelected()) {
+ 				ps.setInt(3, 2);
+ 			}
+ 			else if (star3.isSelected()) {
+ 				ps.setInt(3,3);
+ 			}
+ 			else if (star4.isSelected()) {
+ 				ps.setInt(3,4);
+ 			}
+ 			else if (star5.isSelected()) {
+ 				ps.setInt(3,5);
+ 			}
+ 				
+ 			ps.execute();
+ 			Stage stage;
+ 			stage = (Stage) submit.getScene().getWindow();
+ 			//stage.close();
+
+ 		} catch (SQLException e) {
+ 			
+ 		} catch (ClassNotFoundException e) {
+ 			
+ 		}
+ 	}*/
 
 public void showDialog(String title, String header, String body, AlertType type) {
 	Alert alert = new Alert(type); 
@@ -280,121 +299,3 @@ public void showDialog(String title, String header, String body, AlertType type)
 
 
 
-/*
-
-
-package application;
-
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-
-public class FeedBackController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private Button Avg;
-
-    @FXML
-    private TextArea Avgg;
-
-    @FXML
-    private Button back;
-
-    @FXML
-    private TextField cusid;
-
-    @FXML
-    private TextField feednum;
-
-    @FXML
-    private RadioButton star1;
-
-    @FXML
-    private RadioButton star2;
-
-    @FXML
-    private RadioButton star3;
-
-    @FXML
-    private RadioButton star4;
-
-    @FXML
-    private RadioButton star5;
-
-    @FXML
-    private Button submit;
-
-    @FXML
-    private TableView<?> table;
-
-    @FXML
-    void AvgOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void backOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void star1OnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void star2OnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void star3OnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void star4OnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void star5OnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void submitOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void initialize() {
-        assert Avg != null : "fx:id=\"Avg\" was not injected: check your FXML file 'yyy.fxml'.";
-        assert Avgg != null : "fx:id=\"Avgg\" was not injected: check your FXML file 'yyy.fxml'.";
-        assert back != null : "fx:id=\"back\" was not injected: check your FXML file 'yyy.fxml'.";
-        assert cusid != null : "fx:id=\"cusid\" was not injected: check your FXML file 'yyy.fxml'.";
-        assert feednum != null : "fx:id=\"feednum\" was not injected: check your FXML file 'yyy.fxml'.";
-        assert star1 != null : "fx:id=\"star1\" was not injected: check your FXML file 'yyy.fxml'.";
-        assert star2 != null : "fx:id=\"star2\" was not injected: check your FXML file 'yyy.fxml'.";
-        assert star3 != null : "fx:id=\"star3\" was not injected: check your FXML file 'yyy.fxml'.";
-        assert star4 != null : "fx:id=\"star4\" was not injected: check your FXML file 'yyy.fxml'.";
-        assert star5 != null : "fx:id=\"star5\" was not injected: check your FXML file 'yyy.fxml'.";
-        assert submit != null : "fx:id=\"submit\" was not injected: check your FXML file 'yyy.fxml'.";
-        assert table != null : "fx:id=\"table\" was not injected: check your FXML file 'yyy.fxml'.";
-
-    }
-
-}
-*/

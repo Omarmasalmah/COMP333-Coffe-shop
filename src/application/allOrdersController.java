@@ -64,7 +64,6 @@ public class allOrdersController {
 	@FXML
 	private Button search;
 
-
 	@FXML
 	private DatePicker dateTo;
 

@@ -10,7 +10,7 @@
  *  Employees
  *  Feddback 
  
-![plot](C:\Users\coolnet\Desktop\Java\DataBaseProject\images\basic3.jpg) 
+![My Image](C:\Users\coolnet\Desktop\Java\DataBaseProject\images\basic3.jpg) 
  
 
 ***
